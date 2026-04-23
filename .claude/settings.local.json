@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx:*)"
+      "Bash(npx *)",
+      "Bash(mv /Users/rashed/Desktop/coding/my-portfolio/CLAUDE.md /tmp/CLAUDE.md.bak)",
+      "Bash(mv /Users/rashed/Desktop/coding/my-portfolio/AGENTS.md /tmp/AGENTS.md.bak)",
+      "Bash(mv /tmp/CLAUDE.md.bak /Users/rashed/Desktop/coding/my-portfolio/CLAUDE.md)",
+      "Bash(mv /tmp/AGENTS.md.bak /Users/rashed/Desktop/coding/my-portfolio/AGENTS.md)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(awk '/font-size/ && /px/ { *)"
     ]
   }
 }
