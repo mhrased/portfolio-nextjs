@@ -1,0 +1,17 @@
+{
+  "name": "Mahamud Hasan Rashel",
+  "shortName": "Rashel",
+  "initials": "MR",
+  "role": "Full-stack engineer",
+  "year": "2026",
+  "status": "Available for new projects · Q2 2026",
+  "email": "rasedr007@gmail.com",
+  "phone": "+880 1700-000000",
+  "location": "Dhaka, Bangladesh · Remote-first",
+  "responseTime": "Within 24 hours",
+  "bio1": "I'm a full-stack developer with 6+ years of experience shipping production-grade applications across web, mobile, and cloud.",
+  "bio2": "My work spans the entire stack — from Vue/Next/React frontends, to Node.js APIs backed by Postgres and MongoDB, to React Native and Flutter apps published on Play Store and App Store.",
+  "bio3": "On the infra side, I own CI/CD pipelines with Jenkins and GitHub Actions, container orchestration with Docker, and provision AWS infrastructure with Terraform.",
+  "bio4": "I approach every project with a product mindset — one engineer, every layer, from an empty repo to a live deployment.",
+  "resumeUrl": "#"
+}

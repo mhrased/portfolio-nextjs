@@ -922,7 +922,7 @@ button {
   opacity: calc(1 - var(--p) * 1.4);
   filter: blur(calc(var(--p) * 2px));
   transform-style: preserve-3d;
-  transition: transform 0.08s linear;
+  will-change: transform, opacity;
 }
 
 .phone {
@@ -935,7 +935,7 @@ button {
   opacity: calc(var(--p) * 1.4 - 0.1);
   filter: blur(calc((1 - var(--p)) * 2px));
   transform-style: preserve-3d;
-  transition: transform 0.08s linear;
+  will-change: transform, opacity;
 }
 
 /* ──── Laptop ──── */

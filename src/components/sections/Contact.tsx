@@ -1,6 +1,10 @@
 import { SITE } from '@/constants/site'
+import type { SiteData } from '@/lib/data.server'
 
-export default function Contact() {
+export default function Contact({ site: siteData }: { site?: SiteData }) {
+  const SITE_DATA = siteData || SITE
+  const contactTitle = siteData?.contactTitle
+  const contactKicker = siteData?.contactKicker
   return (
     <section id="contact" className="section" data-section="">
       <div className="section-head reveal">
@@ -10,21 +14,19 @@ export default function Contact() {
       <div className="contact">
         <div className="reveal">
           <h2 className="section-title" style={{ fontSize: 64 }}>
-            <span className="grad-text">Got a product<br />
-            to <span className="accent">build?</span></span>
+            <span className="grad-text">{contactTitle || <>Got a product<br />to <span className="accent">build?</span></>}</span>
           </h2>
           <p className="section-kicker">
-            Whether it&apos;s an MVP, a scale-up, or a full-stack rebuild — tell me about it. I reply
-            within 24 hours.
+            {contactKicker || "Whether it’s an MVP, a scale-up, or a full-stack rebuild — tell me about it. I reply within 24 hours."}
           </p>
           <div className="hero-actions" style={{ marginTop: 32 }}>
-            <a href={`mailto:${SITE.email}`} className="btn btn-primary">
+            <a href={`mailto:${SITE_DATA.email}`} className="btn btn-primary">
               Start a conversation
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </a>
-            <a href="#" className="btn btn-ghost">Download resume</a>
+            <a href={('resumeUrl' in SITE_DATA ? SITE_DATA.resumeUrl : null) || '#'} className="btn btn-ghost">Download resume</a>
           </div>
         </div>
 
@@ -37,7 +39,7 @@ export default function Contact() {
             </div>
             <div>
               <div className="label">Email</div>
-              <div className="val">{SITE.email}</div>
+              <div className="val">{SITE_DATA.email}</div>
             </div>
           </div>
           <div className="contact-row">
@@ -48,7 +50,7 @@ export default function Contact() {
             </div>
             <div>
               <div className="label">Phone</div>
-              <div className="val">{SITE.phone}</div>
+              <div className="val">{SITE_DATA.phone}</div>
             </div>
           </div>
           <div className="contact-row">
@@ -59,7 +61,7 @@ export default function Contact() {
             </div>
             <div>
               <div className="label">Location</div>
-              <div className="val">{SITE.location}</div>
+              <div className="val">{SITE_DATA.location}</div>
             </div>
           </div>
           <div className="contact-row">
@@ -70,7 +72,7 @@ export default function Contact() {
             </div>
             <div>
               <div className="label">Response time</div>
-              <div className="val">{SITE.responseTime}</div>
+              <div className="val">{SITE_DATA.responseTime}</div>
             </div>
           </div>
         </div>

@@ -2,9 +2,16 @@
 
 import { useEffect, useRef } from 'react'
 import { PROCESS_STEPS, COUNTERS } from '@/lib/process'
+import type { ProcessData } from '@/lib/data.server'
 
-export default function Process() {
+interface Props {
+  process?: ProcessData
+}
+
+export default function Process({ process: processData }: Props) {
   const statsRef = useRef<HTMLDivElement>(null)
+  const steps = processData?.steps?.length ? processData.steps : [...PROCESS_STEPS].map((s, i) => ({ id: s.num, num: s.num, title: s.title, desc: s.desc, order: i }))
+  const counters = processData?.counters?.length ? processData.counters : COUNTERS.map((c, i) => ({ id: String(i), count: c.count, label: c.label, suffix: c.count === 99 ? '%' : '+' }))
 
   useEffect(() => {
     const stats = statsRef.current
@@ -17,15 +24,16 @@ export default function Process() {
           if (!e.isIntersecting) return
           const el = e.target as HTMLElement
           const target = parseInt(el.dataset.count!, 10)
+          const suffix = el.dataset.suffix || '+'
           let cur = 0
           const step = Math.max(1, Math.floor(target / 40))
           const tick = () => {
             cur += step
             if (cur >= target) {
-              el.textContent = target + (target === 99 ? '%+' : '+')
+              el.textContent = target + suffix
               return
             }
-            el.textContent = cur + (target === 99 ? '%' : '+')
+            el.textContent = cur + suffix
             requestAnimationFrame(tick)
           }
           tick()
@@ -50,8 +58,8 @@ export default function Process() {
       </h2>
 
       <div className="process-steps reveal delay-1" style={{ marginTop: 64 }}>
-        {PROCESS_STEPS.map((s) => (
-          <div key={s.num} className="process-step">
+        {steps.map((s) => (
+          <div key={s.id} className="process-step">
             <div className="ps-num">{s.num}</div>
             <div className="ps-title">{s.title}</div>
             <div className="ps-desc">{s.desc}</div>
@@ -60,9 +68,13 @@ export default function Process() {
       </div>
 
       <div className="stats reveal delay-2" style={{ marginTop: 80 }} ref={statsRef}>
-        {COUNTERS.map((c) => (
-          <div key={c.label} className="stat">
-            <div className="n" data-count={c.count ?? undefined}>
+        {counters.map((c) => (
+          <div key={c.id} className="stat">
+            <div
+              className="n"
+              data-count={c.count ?? undefined}
+              data-suffix={c.suffix}
+            >
               {c.count === null ? '∞' : '0'}
             </div>
             <div className="l">{c.label}</div>

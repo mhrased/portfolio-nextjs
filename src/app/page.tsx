@@ -1,6 +1,3 @@
-'use client'
-
-import { useEffect } from 'react'
 import Grain from '@/components/Grain'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -11,50 +8,53 @@ import Pipeline from '@/components/sections/Pipeline'
 import Work from '@/components/sections/Work'
 import Process from '@/components/sections/Process'
 import Contact from '@/components/sections/Contact'
+import RevealObserver from '@/components/RevealObserver'
+import {
+  getSiteData,
+  getHeroData,
+  getExperience,
+  getSkills,
+  getProjects,
+  getProcessData,
+} from '@/lib/data.server'
+
+export const dynamic = 'force-dynamic'
 
 export default function Home() {
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('in')
-            obs.unobserve(e.target)
-          }
-        })
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
-    )
-    document.querySelectorAll('.reveal').forEach((el) => obs.observe(el))
-    return () => obs.disconnect()
-  }, [])
+  const site = getSiteData()
+  const hero = getHeroData()
+  const experience = getExperience()
+  const skills = getSkills()
+  const projects = getProjects()
+  const process = getProcessData()
 
   return (
     <>
+      <RevealObserver />
       <Grain />
-      <Navbar />
+      <Navbar site={site} />
 
-      <Hero />
-
-      <div className="section-divider" />
-      <About />
+      <Hero site={site} hero={hero} />
 
       <div className="section-divider" />
-      <Skills />
+      <About site={site} experience={experience} />
+
+      <div className="section-divider" />
+      <Skills skills={skills} />
 
       <div className="section-divider" />
       <Pipeline />
 
       <div className="section-divider" />
-      <Work />
+      <Work projects={projects} />
 
       <div className="section-divider" />
-      <Process />
+      <Process process={process} />
 
       <div className="section-divider" />
-      <Contact />
+      <Contact site={site} />
 
-      <Footer />
+      <Footer site={site} />
     </>
   )
 }

@@ -2,8 +2,9 @@
 
 import { useEffect, useRef } from 'react'
 import { NAV_LINKS } from '@/constants/nav'
+import type { SiteData } from '@/lib/data.server'
 
-export default function Navbar() {
+export default function Navbar({ site }: { site?: SiteData }) {
   const shellRef = useRef<HTMLDivElement>(null)
   const linksWrapRef = useRef<HTMLDivElement>(null)
   const indicatorRef = useRef<HTMLDivElement>(null)
@@ -79,10 +80,10 @@ export default function Navbar() {
     <div className="nav-shell" id="nav-shell" ref={shellRef}>
       <nav className="nav" id="nav">
         <div className="nav-brand">
-          <div className="nav-logo">MR</div>
+          <div className="nav-logo">{site?.initials || 'MR'}</div>
           <div className="nav-name-wrap">
-            <div className="nav-name">Rasel</div>
-            <div className="nav-role">Full-stack</div>
+            <div className="nav-name">{site?.shortName || 'Rasel'}</div>
+            <div className="nav-role">{site?.role?.split(' ')[0] || 'Full-stack'}</div>
           </div>
         </div>
 
@@ -97,7 +98,7 @@ export default function Navbar() {
 
         <div className="nav-divider" />
         <a href="#contact" className="nav-cta">
-          <span className="dot" /> Available
+          <span className="dot" /> {site?.navAvailable || 'Available'}
         </a>
       </nav>
     </div>

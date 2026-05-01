@@ -1,0 +1,91 @@
+[
+  {
+    "id": "proj-1",
+    "title": "Kriyakarak",
+    "type": "Web · Full-stack",
+    "desc": "Service-marketplace platform with provider onboarding, booking flow, payments and admin console. Built and deployed end-to-end.",
+    "url": "https://kriyakarak.com/",
+    "linkLabel": "VISIT LIVE",
+    "tags": [
+      "Next.js",
+      "Node.js",
+      "PostgreSQL",
+      "AWS",
+      "Stripe"
+    ],
+    "image": null,
+    "wide": true,
+    "order": 0,
+    "colorTheme": "purple"
+  },
+  {
+    "id": "proj-2",
+    "title": "Filmd",
+    "type": "Web · WordPress",
+    "desc": "Creative studio site — custom WordPress theme, video-heavy layouts, performance tuned for UK users.",
+    "url": "https://www.filmd.co.uk/",
+    "linkLabel": "VISIT LIVE",
+    "tags": [
+      "WordPress",
+      "ACF",
+      "GSAP"
+    ],
+    "image": null,
+    "wide": false,
+    "order": 1,
+    "colorTheme": "blue"
+  },
+  {
+    "id": "proj-3",
+    "title": "Manage / Mapage",
+    "type": "Web · SaaS",
+    "desc": "Team and project management SaaS — real-time collaboration, task flows, permissions, analytics.",
+    "url": "https://mapage.net/",
+    "linkLabel": "VISIT LIVE",
+    "tags": [
+      "Vue.js",
+      "Node.js",
+      "MongoDB",
+      "Socket.IO"
+    ],
+    "image": null,
+    "wide": false,
+    "order": 2,
+    "colorTheme": "green"
+  },
+  {
+    "id": "proj-4",
+    "title": "edotco VMS",
+    "type": "Mobile · Android",
+    "desc": "Vendor-management mobile app for telecom tower operations — site check-ins, work orders, offline sync.",
+    "url": "https://play.google.com/store/apps/details?id=com.e.co&pli=1",
+    "linkLabel": "PLAY STORE",
+    "tags": [
+      "React Native",
+      "REST API",
+      "Offline Sync"
+    ],
+    "image": null,
+    "wide": false,
+    "order": 3,
+    "colorTheme": "yellow"
+  },
+  {
+    "id": "proj-5",
+    "title": "Bhojon Restaurant POS",
+    "type": "Mobile + Web · POS system",
+    "desc": "Full restaurant POS suite — mobile ordering app paired with web admin, kitchen display, reporting, multi-branch support.",
+    "url": "https://play.google.com/store/apps/details?id=com.bdtask.bhojonpos",
+    "linkLabel": "PLAY STORE",
+    "tags": [
+      "React Native",
+      "Laravel",
+      "MySQL",
+      "Socket.IO"
+    ],
+    "image": null,
+    "wide": true,
+    "order": 4,
+    "colorTheme": "pink"
+  }
+]

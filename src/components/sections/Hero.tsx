@@ -3,8 +3,22 @@
 import { useEffect, useRef } from "react";
 import { SITE } from "@/constants/site";
 import { HERO_LINES, HERO_STATS, HERO_STACK_CARDS, HERO_COMMITS } from "@/lib/hero";
+import type { SiteData, HeroData } from "@/lib/data.server";
 
-export default function Hero() {
+interface Props {
+  site?: SiteData;
+  hero?: HeroData;
+}
+
+export default function Hero({ site: siteData, hero: heroData }: Props) {
+  const lines = heroData?.lines?.length ? heroData.lines : [...HERO_LINES];
+  const stats = heroData?.stats?.length ? heroData.stats : [...HERO_STATS];
+  const status = siteData?.status || SITE.status;
+  const name = siteData?.name || SITE.name;
+  const heroSubtitle = siteData?.heroSubtitle || "I architect, build, and ship production web and mobile products. Frontend, backend, database, DevOps — one engineer, the whole pipeline.";
+  const cta1 = siteData?.heroCta1 || "See the work";
+  const cta2 = siteData?.heroCta2 || "Start a project";
+  const shortName = siteData?.shortName || SITE.shortName;
   const heroWrapRef = useRef<HTMLElement>(null);
   const laptopRef = useRef<HTMLDivElement>(null);
   const phoneRef = useRef<HTMLDivElement>(null);
@@ -38,33 +52,35 @@ export default function Hero() {
     const progressFill = progressFillRef.current;
     const scrollCue = scrollCueRef.current;
 
-    function updateMorph() {
-      if (!heroWrap || !laptop || !phone) return;
+    let targetP = 0;
+    let currentP = 0;
+    let rafId = 0;
+
+    function getTargetP() {
+      if (!heroWrap) return 0;
       const rect = heroWrap.getBoundingClientRect();
       const total = heroWrap.offsetHeight - window.innerHeight;
       const scrolled = -rect.top;
-      const p = Math.max(0, Math.min(1, scrolled / total));
-
-      laptop.style.setProperty("--p", String(p));
-      phone.style.setProperty("--p", String(p));
-
-      if (progressFill) progressFill.style.height = p * 100 + "%";
-      if (scrollCue) scrollCue.style.opacity = p > 0.05 ? "0" : "1";
+      return Math.max(0, Math.min(1, scrolled / total));
     }
 
-    let ticking = false;
-    function onScroll() {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          updateMorph();
-          ticking = false;
-        });
-        ticking = true;
-      }
+    function morphLoop() {
+      targetP = getTargetP();
+      // Lerp towards target — factor 0.1 gives a buttery spring-like follow
+      currentP += (targetP - currentP) * 0.1;
+
+      if (laptop) laptop.style.setProperty("--p", String(currentP));
+      if (phone) phone.style.setProperty("--p", String(currentP));
+      if (progressFill) progressFill.style.height = currentP * 100 + "%";
+      if (scrollCue) scrollCue.style.opacity = currentP > 0.05 ? "0" : "1";
+
+      rafId = requestAnimationFrame(morphLoop);
     }
 
+    rafId = requestAnimationFrame(morphLoop);
+
+    function onScroll() { /* target is read inside the loop */ }
     window.addEventListener("scroll", onScroll, { passive: true });
-    updateMorph();
 
     // Tech stack card parallax
     const stackCards = document.querySelectorAll<HTMLElement>(".stack-card");
@@ -80,6 +96,7 @@ export default function Hero() {
     window.addEventListener("mousemove", onMouseMove);
 
     return () => {
+      cancelAnimationFrame(rafId);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("mousemove", onMouseMove);
     };
@@ -122,10 +139,10 @@ export default function Hero() {
           {/* LEFT — copy */}
           <div className="hero-left">
             <div className="hero-status">
-              <span className="dot" /> {SITE.status}
+              <span className="dot" /> {status}
             </div>
             <h1 className="hero-title">
-              {HERO_LINES.map((line) => (
+              {lines.map((line) => (
                 <span key={line} className="line">
                   <span className="grad-text">{line}</span>
                 </span>
@@ -133,12 +150,11 @@ export default function Hero() {
             </h1>
             <p className="hero-sub">
               I&apos;m{" "}
-              <strong style={{ color: "var(--text)" }}>{SITE.name}</strong>
-              {" "}— I architect, build, and ship production web and mobile products.
-              Frontend, backend, database, DevOps — one engineer, the whole pipeline.
+              <strong style={{ color: "var(--text)" }}>{name}</strong>
+              {" "}— {heroSubtitle}
             </p>
             <div className="hero-meta">
-              {HERO_STATS.map((s) => (
+              {stats.map((s) => (
                 <div key={s.label} className="m">
                   <div className="n">{s.value}</div>
                   <div className="l">{s.label}</div>
@@ -147,7 +163,7 @@ export default function Hero() {
             </div>
             <div className="hero-actions">
               <a href="#work" className="btn btn-primary">
-                See the work
+                {cta1}
                 <svg
                   width="14"
                   height="14"
@@ -160,7 +176,7 @@ export default function Hero() {
                 </svg>
               </a>
               <a href="#contact" className="btn btn-ghost">
-                Start a project
+                {cta2}
               </a>
             </div>
           </div>
@@ -333,9 +349,9 @@ export default function Hero() {
                     <div className="dc-phone-header">
                       <div className="dc-phone-greet">
                         <div className="dc-phone-hello">Good morning,</div>
-                        <div className="dc-phone-name">Rasel</div>
+                        <div className="dc-phone-name">{shortName}</div>
                       </div>
-                      <div className="dc-phone-avatar">MR</div>
+                      <div className="dc-phone-avatar">{siteData?.initials || SITE.initials}</div>
                     </div>
                     <div className="dc-phone-card">
                       <div className="dc-pc-label">ACTIVE DEPLOYS</div>

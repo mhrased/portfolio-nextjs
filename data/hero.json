@@ -1,0 +1,8 @@
+{
+  "lines": ["Full-stack.", "End-to-end.", "From scratch", "to deployed."],
+  "stats": [
+    { "value": "6+", "label": "Years shipping" },
+    { "value": "40+", "label": "Projects deployed" },
+    { "value": "6", "label": "Core stacks" }
+  ]
+}

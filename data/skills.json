@@ -1,0 +1,62 @@
+[
+  {
+    "id": "skill-1",
+    "num": "/ 01",
+    "title": "Web Development",
+    "desc": "Modern SPAs and SSR apps — React, Next.js, Vue. Type-safe, accessible, performant by default.",
+    "tags": ["React", "Next.js", "Vue 3", "TypeScript", "Tailwind"],
+    "pct": 95,
+    "iconType": "web",
+    "order": 0
+  },
+  {
+    "id": "skill-2",
+    "num": "/ 02",
+    "title": "Backend & APIs",
+    "desc": "Node.js services, REST + GraphQL, queue-based async work, auth, rate-limiting, observability.",
+    "tags": ["Node.js", "Express", "NestJS", "GraphQL", "Redis"],
+    "pct": 93,
+    "iconType": "api",
+    "order": 1
+  },
+  {
+    "id": "skill-3",
+    "num": "/ 03",
+    "title": "Databases",
+    "desc": "Relational schema design, query tuning, indexing strategy. NoSQL for scale and flexibility.",
+    "tags": ["PostgreSQL", "MongoDB", "Prisma", "Redis", "MySQL"],
+    "pct": 90,
+    "iconType": "database",
+    "order": 2
+  },
+  {
+    "id": "skill-4",
+    "num": "/ 04",
+    "title": "Mobile Development",
+    "desc": "Cross-platform apps for iOS and Android — native feel, shared codebase, deep platform API integrations.",
+    "tags": ["React Native", "Flutter", "Expo", "Firebase"],
+    "pct": 92,
+    "iconType": "mobile",
+    "order": 3
+  },
+  {
+    "id": "skill-5",
+    "num": "/ 05",
+    "title": "DevOps & Cloud",
+    "desc": "CI/CD pipelines, containerized deployments, infra-as-code, zero-downtime releases, monitoring.",
+    "tags": ["AWS", "Docker", "Terraform", "Jenkins", "GitHub Actions"],
+    "pct": 88,
+    "iconType": "devops",
+    "order": 4
+  },
+  {
+    "id": "skill-6",
+    "num": "/ 06",
+    "title": "WordPress / CMS",
+    "desc": "Custom themes and plugins, headless WordPress, WooCommerce storefronts, performance tuning.",
+    "tags": ["WordPress", "WooCommerce", "Custom Plugins", "ACF"],
+    "pct": 94,
+    "iconType": "cms",
+    "order": 5
+  }
+]
