@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { adminAuth } from '@/lib/firebase/admin'
 import { createSession } from '@/lib/auth/session'
 import { checkRateLimit, resetRateLimit } from '@/lib/auth/rate-limit'
-import { isValidEmail, sanitizeText } from '@/lib/sanitize'
 
 export async function POST(request: NextRequest) {
-  // Rate limit by IP — 5 attempts per 15 minutes
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
   if (!checkRateLimit(ip)) {
     return NextResponse.json(
@@ -21,21 +20,18 @@ export async function POST(request: NextRequest) {
   }
 
   const raw = body as Record<string, unknown>
-  const email = sanitizeText(raw?.email, 320)
-  const password = sanitizeText(raw?.password, 128)
+  const idToken = typeof raw?.idToken === 'string' ? raw.idToken : null
 
-  if (!isValidEmail(email) || !password) {
+  if (!idToken) {
     return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
   }
 
-  const validEmail = process.env.ADMIN_EMAIL ?? 'admin@example.com'
-  const validPassword = process.env.ADMIN_PASSWORD ?? 'admin123'
-
-  if (email.toLowerCase() !== validEmail.toLowerCase() || password !== validPassword) {
+  try {
+    const decoded = await adminAuth.verifyIdToken(idToken)
+    resetRateLimit(ip)
+    await createSession(decoded.email ?? '')
+    return NextResponse.json({ success: true })
+  } catch {
     return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
   }
-
-  resetRateLimit(ip)
-  await createSession(email)
-  return NextResponse.json({ success: true })
 }

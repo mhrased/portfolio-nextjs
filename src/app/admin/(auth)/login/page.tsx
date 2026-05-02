@@ -2,6 +2,8 @@
 
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '@/lib/firebase/client'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -15,18 +17,31 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
     try {
+      const credential = await signInWithEmailAndPassword(auth, email, password)
+      const idToken = await credential.user.getIdToken()
+
       const res = await fetch('/api/admin/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ idToken }),
       })
       if (res.ok) {
         router.push('/admin/dashboard')
       } else {
-        setError('Invalid email or password')
+        const data = await res.json().catch(() => ({}))
+        setError((data as { error?: string }).error ?? 'Invalid email or password')
       }
-    } catch {
-      setError('Connection error. Please try again.')
+    } catch (err: unknown) {
+      const code = (err as { code?: string })?.code
+      if (
+        code === 'auth/invalid-credential' ||
+        code === 'auth/user-not-found' ||
+        code === 'auth/wrong-password'
+      ) {
+        setError('Invalid email or password')
+      } else {
+        setError('Connection error. Please try again.')
+      }
     } finally {
       setLoading(false)
     }
