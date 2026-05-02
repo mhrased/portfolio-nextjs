@@ -17,16 +17,18 @@ import {
   getProjects,
   getProcessData,
 } from '@/lib/data.server'
+import { getLatestCommits } from '@/lib/commits'
 
 export const dynamic = 'force-dynamic'
 
-export default function Home() {
+export default async function Home() {
   const site = getSiteData()
   const hero = getHeroData()
   const experience = getExperience()
   const skills = getSkills()
   const projects = getProjects()
   const process = getProcessData()
+  const commits = await getLatestCommits()
 
   return (
     <>
@@ -34,7 +36,7 @@ export default function Home() {
       <Grain />
       <Navbar site={site} />
 
-      <Hero site={site} hero={hero} />
+      <Hero site={site} hero={hero} commits={commits} />
 
       <div className="section-divider" />
       <About site={site} experience={experience} />

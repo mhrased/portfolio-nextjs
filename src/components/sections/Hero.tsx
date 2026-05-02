@@ -2,15 +2,17 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { SITE } from '@/constants/site'
-import { HERO_LINES, HERO_STATS, HERO_STACK_CARDS, HERO_COMMITS } from '@/lib/hero'
+import { HERO_LINES, HERO_STATS, HERO_STACK_CARDS } from '@/lib/hero'
 import type { SiteData, HeroData } from '@/lib/data.server'
+import type { CommitEntry } from '@/lib/commits'
 
 interface Props {
   site?: SiteData
   hero?: HeroData
+  commits?: CommitEntry[]
 }
 
-export default function Hero({ site: siteData, hero: heroData }: Props) {
+export default function Hero({ site: siteData, hero: heroData, commits }: Props) {
   const lines = useMemo(
     () => (heroData?.lines?.length ? heroData.lines : [...HERO_LINES]),
     [heroData],
@@ -188,7 +190,7 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
 
         {/* Floating commit tags */}
         <div className="commits">
-          {HERO_COMMITS.map((c) => (
+          {(commits ?? []).map((c) => (
             <div
               key={c.hash}
               className="commit"

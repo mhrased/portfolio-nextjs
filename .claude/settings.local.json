@@ -34,7 +34,8 @@
       "Bash(npm test *)",
       "Bash(sed -n '45,60p' \"/Users/rashed/Desktop/coding/my-portfolio/src/app/admin/\\(panel\\)/media/MediaManager.tsx\")",
       "Bash(sed -n '188,200p' \"/Users/rashed/Desktop/coding/my-portfolio/src/app/admin/\\(panel\\)/process/ProcessManager.tsx\")",
-      "Bash(sed -n '340,355p' \"/Users/rashed/Desktop/coding/my-portfolio/src/components/sections/Hero.tsx\")"
+      "Bash(sed -n '340,355p' \"/Users/rashed/Desktop/coding/my-portfolio/src/components/sections/Hero.tsx\")",
+      "Bash(git *)"
     ]
   }
 }
