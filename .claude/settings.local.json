@@ -29,7 +29,12 @@
       "Bash(grep -n \"background:.*rgba\\(.*1[5-9],.*1[0-9],.*[23][0-9]\\\\|background:.*#0[a-f0-9]\\\\{5\\\\}\\\\|background:.*#1[a-f0-9]\\\\{5\\\\}\" /Users/rashed/Desktop/coding/my-portfolio/src/app/globals.css)",
       "Bash(awk 'NR>=1395 && NR<=1480' /Users/rashed/Desktop/coding/my-portfolio/src/app/globals.css)",
       "Bash(awk 'NR>=2320 && NR<=2395' /Users/rashed/Desktop/coding/my-portfolio/src/app/globals.css)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(xargs cat *)",
+      "Bash(npm test *)",
+      "Bash(sed -n '45,60p' \"/Users/rashed/Desktop/coding/my-portfolio/src/app/admin/\\(panel\\)/media/MediaManager.tsx\")",
+      "Bash(sed -n '188,200p' \"/Users/rashed/Desktop/coding/my-portfolio/src/app/admin/\\(panel\\)/process/ProcessManager.tsx\")",
+      "Bash(sed -n '340,355p' \"/Users/rashed/Desktop/coding/my-portfolio/src/components/sections/Hero.tsx\")"
     ]
   }
 }

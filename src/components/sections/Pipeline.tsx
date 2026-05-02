@@ -34,7 +34,7 @@ export default function Pipeline() {
           }
         })
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     )
 
     obs.observe(card)
@@ -47,15 +47,23 @@ export default function Pipeline() {
         <div className="section-index">03 · Build → Deploy</div>
       </div>
       <h2 className="section-title reveal">
-        <span className="grad-text">From empty repo<br />
-        to <span className="accent">live in production.</span></span>
+        <span className="grad-text">
+          From empty repo
+          <br />
+          to <span className="accent">live in production.</span>
+        </span>
       </h2>
       <p className="section-kicker reveal delay-1">
-        I own the whole delivery pipeline. Code, build, test, containerize, deploy, monitor — all
-        of it, end-to-end.
+        I own the whole delivery pipeline. Code, build, test, containerize, deploy, monitor — all of
+        it, end-to-end.
       </p>
 
-      <div className="pipeline reveal delay-2" id="pipeline-card" style={{ marginTop: 64 }} ref={cardRef}>
+      <div
+        className="pipeline reveal delay-2"
+        id="pipeline-card"
+        style={{ marginTop: 64 }}
+        ref={cardRef}
+      >
         <div className="pipeline-nodes">
           {PIPELINE_NODES.map((node) => (
             <div key={node.title} className={`pipe-node${node.active ? ' active' : ''}`}>
@@ -74,7 +82,11 @@ export default function Pipeline() {
 
         <div className="pipeline-terminal">
           <div className="term-head">
-            <div className="dots"><span /><span /><span /></div>
+            <div className="dots">
+              <span />
+              <span />
+              <span />
+            </div>
             <span className="path">~/deploy.log — run #1247</span>
           </div>
           <div id="term-lines" ref={termRef} />

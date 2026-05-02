@@ -1,42 +1,51 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { NAV_LINKS } from '@/constants/nav'
 import type { SiteData } from '@/lib/data.server'
+
+function subscribeTheme(cb: () => void) {
+  const obs = new MutationObserver(cb)
+  obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+  return () => obs.disconnect()
+}
 
 export default function Navbar({ site }: { site?: SiteData }) {
   const shellRef = useRef<HTMLDivElement>(null)
   const linksWrapRef = useRef<HTMLDivElement>(null)
   const indicatorRef = useRef<HTMLDivElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [isDark, setIsDark] = useState(true)
 
-  // Sync theme state from DOM on mount
-  useEffect(() => {
-    setIsDark(document.documentElement.getAttribute('data-theme') !== 'light')
-  }, [])
+  // Derive isDark directly from the DOM attribute — no separate state needed
+  const isDark = useSyncExternalStore(
+    subscribeTheme,
+    () => document.documentElement.getAttribute('data-theme') !== 'light',
+    () => true, // server snapshot — default dark
+  )
 
   function toggleTheme() {
-    const next = !isDark
-    setIsDark(next)
-    if (next) {
-      document.documentElement.removeAttribute('data-theme')
-      localStorage.setItem('theme', 'dark')
-    } else {
+    if (isDark) {
       document.documentElement.setAttribute('data-theme', 'light')
       localStorage.setItem('theme', 'light')
+    } else {
+      document.documentElement.removeAttribute('data-theme')
+      localStorage.setItem('theme', 'dark')
     }
   }
 
   // Lock body scroll when mobile menu open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [menuOpen])
 
   // Close on resize to desktop
   useEffect(() => {
-    function onResize() { if (window.innerWidth > 900) setMenuOpen(false) }
+    function onResize() {
+      if (window.innerWidth > 900) setMenuOpen(false)
+    }
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
@@ -102,7 +111,7 @@ export default function Navbar({ site }: { site?: SiteData }) {
           }
         })
       },
-      { rootMargin: '-40% 0px -40% 0px' }
+      { rootMargin: '-40% 0px -40% 0px' },
     )
     sections.forEach((s) => navObs.observe(s))
 
@@ -146,12 +155,27 @@ export default function Navbar({ site }: { site?: SiteData }) {
 
           <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
             {isDark ? (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <circle cx="12" cy="12" r="5" />
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
               </svg>
             ) : (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
             )}
           </button>
@@ -178,7 +202,10 @@ export default function Navbar({ site }: { site?: SiteData }) {
               href={link.href}
               className="mobile-nav-link"
               style={{ transitionDelay: menuOpen ? `${i * 60}ms` : '0ms' }}
-              onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
+              onClick={(e) => {
+                e.preventDefault()
+                handleNavClick(link.href)
+              }}
             >
               <span className="mobile-nav-num">0{i + 1}</span>
               {link.label}
@@ -188,7 +215,10 @@ export default function Navbar({ site }: { site?: SiteData }) {
             href="#contact"
             className="mobile-cta"
             style={{ transitionDelay: menuOpen ? `${NAV_LINKS.length * 60}ms` : '0ms' }}
-            onClick={(e) => { e.preventDefault(); handleNavClick('#contact') }}
+            onClick={(e) => {
+              e.preventDefault()
+              handleNavClick('#contact')
+            }}
           >
             <span className="dot" /> {site?.navAvailable || 'Available for projects'}
           </a>

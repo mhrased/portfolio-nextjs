@@ -33,54 +33,78 @@ export default function LoginPage() {
   }
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: '#0b0f1a',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontFamily: 'var(--font-sans, system-ui, sans-serif)',
-      padding: '20px',
-    }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        background: '#0b0f1a',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: 'var(--font-sans, system-ui, sans-serif)',
+        padding: '20px',
+      }}
+    >
       <div style={{ width: '100%', maxWidth: 420 }}>
         {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 52,
-            height: 52,
-            background: 'linear-gradient(135deg, #7359ff, #3399ff)',
-            borderRadius: 14,
-            fontSize: 18,
-            fontWeight: 700,
-            color: '#fff',
-            fontFamily: 'var(--font-display, system-ui)',
-            marginBottom: 20,
-            letterSpacing: '-0.02em',
-          }}>MR</div>
-          <h1 style={{
-            fontSize: 26,
-            fontWeight: 700,
-            color: '#f0f4ff',
-            margin: 0,
-            fontFamily: 'var(--font-display, system-ui)',
-            letterSpacing: '-0.03em',
-          }}>Admin Panel</h1>
-          <p style={{ color: '#8892a4', fontSize: 14, marginTop: 8 }}>Sign in to manage your portfolio</p>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 52,
+              height: 52,
+              background: 'linear-gradient(135deg, #7359ff, #3399ff)',
+              borderRadius: 14,
+              fontSize: 18,
+              fontWeight: 700,
+              color: '#fff',
+              fontFamily: 'var(--font-display, system-ui)',
+              marginBottom: 20,
+              letterSpacing: '-0.02em',
+            }}
+          >
+            MR
+          </div>
+          <h1
+            style={{
+              fontSize: 26,
+              fontWeight: 700,
+              color: '#f0f4ff',
+              margin: 0,
+              fontFamily: 'var(--font-display, system-ui)',
+              letterSpacing: '-0.03em',
+            }}
+          >
+            Admin Panel
+          </h1>
+          <p style={{ color: '#8892a4', fontSize: 14, marginTop: 8 }}>
+            Sign in to manage your portfolio
+          </p>
         </div>
 
         {/* Card */}
-        <div style={{
-          background: '#141827',
-          border: '1px solid rgba(255,255,255,0.07)',
-          borderRadius: 16,
-          padding: '32px',
-        }}>
+        <div
+          style={{
+            background: '#141827',
+            border: '1px solid rgba(255,255,255,0.07)',
+            borderRadius: 16,
+            padding: '32px',
+          }}
+        >
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: 20 }}>
-              <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#8892a4', marginBottom: 8, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: '#8892a4',
+                  marginBottom: 8,
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                }}
+              >
                 Email
               </label>
               <input
@@ -101,12 +125,22 @@ export default function LoginPage() {
                   boxSizing: 'border-box',
                   transition: 'border-color 0.2s',
                 }}
-                onFocus={(e) => e.target.style.borderColor = '#7359ff'}
-                onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+                onFocus={(e) => (e.target.style.borderColor = '#7359ff')}
+                onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')}
               />
             </div>
             <div style={{ marginBottom: 28 }}>
-              <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#8892a4', marginBottom: 8, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: '#8892a4',
+                  marginBottom: 8,
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                }}
+              >
                 Password
               </label>
               <input
@@ -127,21 +161,25 @@ export default function LoginPage() {
                   boxSizing: 'border-box',
                   transition: 'border-color 0.2s',
                 }}
-                onFocus={(e) => e.target.style.borderColor = '#7359ff'}
-                onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+                onFocus={(e) => (e.target.style.borderColor = '#7359ff')}
+                onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')}
               />
             </div>
 
             {error && (
-              <div style={{
-                background: 'rgba(255, 92, 108, 0.1)',
-                border: '1px solid rgba(255, 92, 108, 0.3)',
-                borderRadius: 8,
-                padding: '10px 14px',
-                color: '#ff7a8a',
-                fontSize: 13,
-                marginBottom: 20,
-              }}>{error}</div>
+              <div
+                style={{
+                  background: 'rgba(255, 92, 108, 0.1)',
+                  border: '1px solid rgba(255, 92, 108, 0.3)',
+                  borderRadius: 8,
+                  padding: '10px 14px',
+                  color: '#ff7a8a',
+                  fontSize: 13,
+                  marginBottom: 20,
+                }}
+              >
+                {error}
+              </div>
             )}
 
             <button

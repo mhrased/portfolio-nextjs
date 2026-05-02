@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 
 const COOKIE_NAME = 'admin_session'
 const secret = new TextEncoder().encode(
-  process.env.SESSION_SECRET || 'fallback-secret-change-in-production-32ch'
+  process.env.SESSION_SECRET || 'fallback-secret-change-in-production-32ch',
 )
 
 export interface SessionPayload {

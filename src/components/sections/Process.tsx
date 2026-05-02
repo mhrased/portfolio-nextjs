@@ -10,8 +10,23 @@ interface Props {
 
 export default function Process({ process: processData }: Props) {
   const statsRef = useRef<HTMLDivElement>(null)
-  const steps = processData?.steps?.length ? processData.steps : [...PROCESS_STEPS].map((s, i) => ({ id: s.num, num: s.num, title: s.title, desc: s.desc, order: i }))
-  const counters = processData?.counters?.length ? processData.counters : COUNTERS.map((c, i) => ({ id: String(i), count: c.count, label: c.label, suffix: c.count === 99 ? '%' : '+' }))
+  const steps = processData?.steps?.length
+    ? processData.steps
+    : [...PROCESS_STEPS].map((s, i) => ({
+        id: s.num,
+        num: s.num,
+        title: s.title,
+        desc: s.desc,
+        order: i,
+      }))
+  const counters = processData?.counters?.length
+    ? processData.counters
+    : COUNTERS.map((c, i) => ({
+        id: String(i),
+        count: c.count,
+        label: c.label,
+        suffix: c.count === 99 ? '%' : '+',
+      }))
 
   useEffect(() => {
     const stats = statsRef.current
@@ -40,7 +55,7 @@ export default function Process({ process: processData }: Props) {
           obs.unobserve(el)
         })
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     )
 
     els.forEach((el) => obs.observe(el))
@@ -53,8 +68,11 @@ export default function Process({ process: processData }: Props) {
         <div className="section-index">05 · How I work</div>
       </div>
       <h2 className="section-title reveal">
-        <span className="grad-text">A process built<br />
-        for <span className="accent-blue">shipping.</span></span>
+        <span className="grad-text">
+          A process built
+          <br />
+          for <span className="accent-blue">shipping.</span>
+        </span>
       </h2>
 
       <div className="process-steps reveal delay-1" style={{ marginTop: 64 }}>
@@ -70,11 +88,7 @@ export default function Process({ process: processData }: Props) {
       <div className="stats reveal delay-2" style={{ marginTop: 80 }} ref={statsRef}>
         {counters.map((c) => (
           <div key={c.id} className="stat">
-            <div
-              className="n"
-              data-count={c.count ?? undefined}
-              data-suffix={c.suffix}
-            >
+            <div className="n" data-count={c.count ?? undefined} data-suffix={c.suffix}>
               {c.count === null ? '∞' : '0'}
             </div>
             <div className="l">{c.label}</div>

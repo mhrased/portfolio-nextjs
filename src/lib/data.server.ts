@@ -124,13 +124,15 @@ const defaultSite: SiteData = {
   bio2: 'My work spans the entire stack — from Vue/Next/React frontends, to Node.js APIs backed by Postgres and MongoDB, to React Native and Flutter apps published on Play Store and App Store.',
   bio3: 'On the infra side, I own CI/CD pipelines with Jenkins and GitHub Actions, container orchestration with Docker, and provision AWS infrastructure with Terraform.',
   bio4: 'I approach every project with a product mindset — one engineer, every layer, from an empty repo to a live deployment.',
-  heroSubtitle: 'I architect, build, and ship production web and mobile products. Frontend, backend, database, DevOps — one engineer, the whole pipeline.',
+  heroSubtitle:
+    'I architect, build, and ship production web and mobile products. Frontend, backend, database, DevOps — one engineer, the whole pipeline.',
   heroCta1: 'See the work',
   heroCta2: 'Start a project',
   navAvailable: 'Available',
   aboutTitle: 'Engineering full-stack products that scale.',
   contactTitle: 'Got a product to build?',
-  contactKicker: "Whether it's an MVP, a scale-up, or a full-stack rebuild — tell me about it. I reply within 24 hours.",
+  contactKicker:
+    "Whether it's an MVP, a scale-up, or a full-stack rebuild — tell me about it. I reply within 24 hours.",
   footerTagline: 'Built from scratch.',
   gaId: '',
 }
@@ -148,10 +150,34 @@ const defaultProcess: ProcessData = {
   title: 'A process built for shipping.',
   titleAccent: 'shipping.',
   steps: [
-    { id: 's1', num: '01', title: 'Discover', desc: 'Understand the product, users, constraints. Map the scope. Align on what success looks like.', order: 0 },
-    { id: 's2', num: '02', title: 'Architect', desc: 'Pick the stack. Design the data model. Sketch the API. Set up CI, infra, and environments.', order: 1 },
-    { id: 's3', num: '03', title: 'Build & Ship', desc: 'Iterative delivery in small PRs. Demoable increments every week. Bug-fix in minutes, not days.', order: 2 },
-    { id: 's4', num: '04', title: 'Operate', desc: 'Deploy, monitor, measure. Ongoing maintenance, perf tuning, feature additions as needed.', order: 3 },
+    {
+      id: 's1',
+      num: '01',
+      title: 'Discover',
+      desc: 'Understand the product, users, constraints. Map the scope. Align on what success looks like.',
+      order: 0,
+    },
+    {
+      id: 's2',
+      num: '02',
+      title: 'Architect',
+      desc: 'Pick the stack. Design the data model. Sketch the API. Set up CI, infra, and environments.',
+      order: 1,
+    },
+    {
+      id: 's3',
+      num: '03',
+      title: 'Build & Ship',
+      desc: 'Iterative delivery in small PRs. Demoable increments every week. Bug-fix in minutes, not days.',
+      order: 2,
+    },
+    {
+      id: 's4',
+      num: '04',
+      title: 'Operate',
+      desc: 'Deploy, monitor, measure. Ongoing maintenance, perf tuning, feature additions as needed.',
+      order: 3,
+    },
   ],
   counters: [
     { id: 'c1', count: 6, label: 'Years of experience', suffix: '+' },

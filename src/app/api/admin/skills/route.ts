@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSkills, saveSkills, SkillItem } from '@/lib/data.server'
+import { getSkills, saveSkills } from '@/lib/data.server'
+import { sanitizeSkillBody } from '@/lib/sanitize'
 import { revalidatePath } from 'next/cache'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -8,16 +9,18 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json()
+  let body: unknown
+  try {
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
+  }
+  const sanitized = sanitizeSkillBody(body)
   const items = getSkills()
-  const newItem: SkillItem = {
+  const newItem = {
+    ...sanitized,
     id: uuidv4(),
     num: `/ ${String(items.length + 1).padStart(2, '0')}`,
-    title: body.title || '',
-    desc: body.desc || '',
-    tags: body.tags || [],
-    pct: body.pct || 80,
-    iconType: body.iconType || 'default',
     order: items.length,
   }
   items.push(newItem)

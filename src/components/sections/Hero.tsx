@@ -1,166 +1,180 @@
-"use client";
+'use client'
 
-import { useEffect, useRef, useState } from "react";
-import { SITE } from "@/constants/site";
-import { HERO_LINES, HERO_STATS, HERO_STACK_CARDS, HERO_COMMITS } from "@/lib/hero";
-import type { SiteData, HeroData } from "@/lib/data.server";
+import { useEffect, useRef, useState } from 'react'
+import { SITE } from '@/constants/site'
+import { HERO_LINES, HERO_STATS, HERO_STACK_CARDS, HERO_COMMITS } from '@/lib/hero'
+import type { SiteData, HeroData } from '@/lib/data.server'
 
 interface Props {
-  site?: SiteData;
-  hero?: HeroData;
+  site?: SiteData
+  hero?: HeroData
 }
 
 export default function Hero({ site: siteData, hero: heroData }: Props) {
-  const lines = heroData?.lines?.length ? heroData.lines : [...HERO_LINES];
-  const stats = heroData?.stats?.length ? heroData.stats : [...HERO_STATS];
-  const status = siteData?.status || SITE.status;
-  const name = siteData?.name || SITE.name;
-  const heroSubtitle = siteData?.heroSubtitle || "I architect, build, and ship production web and mobile products. Frontend, backend, database, DevOps — one engineer, the whole pipeline.";
-  const cta1 = siteData?.heroCta1 || "See the work";
-  const cta2 = siteData?.heroCta2 || "Start a project";
-  const shortName = siteData?.shortName || SITE.shortName;
-  const heroWrapRef = useRef<HTMLElement>(null);
-  const laptopRef = useRef<HTMLDivElement>(null);
-  const phoneRef = useRef<HTMLDivElement>(null);
-  const progressFillRef = useRef<HTMLDivElement>(null);
-  const scrollCueRef = useRef<HTMLDivElement>(null);
-  const starsRef = useRef<HTMLDivElement>(null);
+  const lines = heroData?.lines?.length ? heroData.lines : [...HERO_LINES]
+  const stats = heroData?.stats?.length ? heroData.stats : [...HERO_STATS]
+  const status = siteData?.status || SITE.status
+  const name = siteData?.name || SITE.name
+  const heroSubtitle =
+    siteData?.heroSubtitle ||
+    'I architect, build, and ship production web and mobile products. Frontend, backend, database, DevOps — one engineer, the whole pipeline.'
+  const cta1 = siteData?.heroCta1 || 'See the work'
+  const cta2 = siteData?.heroCta2 || 'Start a project'
+  const shortName = siteData?.shortName || SITE.shortName
+  const heroWrapRef = useRef<HTMLElement>(null)
+  const laptopRef = useRef<HTMLDivElement>(null)
+  const phoneRef = useRef<HTMLDivElement>(null)
+  const progressFillRef = useRef<HTMLDivElement>(null)
+  const scrollCueRef = useRef<HTMLDivElement>(null)
+  const starsRef = useRef<HTMLDivElement>(null)
 
   // Typewriter state machine
-  type TwState = { display: string[]; phase: "typing" | "paused" | "erasing"; line: number; char: number };
-  const [tw, setTw] = useState<TwState>({ display: lines.map(() => ""), phase: "typing", line: 0, char: 0 });
+  type TwState = {
+    display: string[]
+    phase: 'typing' | 'paused' | 'erasing'
+    line: number
+    char: number
+  }
+  const [tw, setTw] = useState<TwState>({
+    display: lines.map(() => ''),
+    phase: 'typing',
+    line: 0,
+    char: 0,
+  })
 
   useEffect(() => {
-    const TYPING_MS = 130;
-    const ERASE_MS  = 70;
-    const PAUSE_MS  = 2600;
-    const NEXT_LINE_PAUSE = 350;
-    let tid: ReturnType<typeof setTimeout>;
+    const TYPING_MS = 130
+    const ERASE_MS = 70
+    const PAUSE_MS = 2600
+    const NEXT_LINE_PAUSE = 350
+    let tid: ReturnType<typeof setTimeout>
 
     function step(s: TwState) {
-      const { display, phase, line, char } = s;
-      let next: TwState;
+      const { display, phase, line, char } = s
+      let next: TwState
 
-      if (phase === "typing") {
-        const target = lines[line];
+      if (phase === 'typing') {
+        const target = lines[line]
         if (char < target.length) {
-          const d = display.map((t, i) => (i === line ? target.slice(0, char + 1) : t));
-          next = { display: d, phase: "typing", line, char: char + 1 };
-          setTw(next);
-          tid = setTimeout(() => step(next), TYPING_MS);
+          const d = display.map((t, i) => (i === line ? target.slice(0, char + 1) : t))
+          next = { display: d, phase: 'typing', line, char: char + 1 }
+          setTw(next)
+          tid = setTimeout(() => step(next), TYPING_MS)
         } else if (line < lines.length - 1) {
-          next = { ...s, line: line + 1, char: 0 };
-          setTw(next);
-          tid = setTimeout(() => step(next), NEXT_LINE_PAUSE);
+          next = { ...s, line: line + 1, char: 0 }
+          setTw(next)
+          tid = setTimeout(() => step(next), NEXT_LINE_PAUSE)
         } else {
-          next = { ...s, phase: "paused" };
-          setTw(next);
-          tid = setTimeout(() => step(next), PAUSE_MS);
+          next = { ...s, phase: 'paused' }
+          setTw(next)
+          tid = setTimeout(() => step(next), PAUSE_MS)
         }
-      } else if (phase === "paused") {
-        next = { ...s, phase: "erasing" };
-        setTw(next);
-        tid = setTimeout(() => step(next), 0);
+      } else if (phase === 'paused') {
+        next = { ...s, phase: 'erasing' }
+        setTw(next)
+        tid = setTimeout(() => step(next), 0)
       } else {
         if (char > 0) {
-          const d = display.map((t, i) => (i === line ? lines[line].slice(0, char - 1) : t));
-          next = { display: d, phase: "erasing", line, char: char - 1 };
-          setTw(next);
-          tid = setTimeout(() => step(next), ERASE_MS);
+          const d = display.map((t, i) => (i === line ? lines[line].slice(0, char - 1) : t))
+          next = { display: d, phase: 'erasing', line, char: char - 1 }
+          setTw(next)
+          tid = setTimeout(() => step(next), ERASE_MS)
         } else if (line > 0) {
-          const prev = line - 1;
-          next = { ...s, line: prev, char: lines[prev].length };
-          setTw(next);
-          tid = setTimeout(() => step(next), NEXT_LINE_PAUSE);
+          const prev = line - 1
+          next = { ...s, line: prev, char: lines[prev].length }
+          setTw(next)
+          tid = setTimeout(() => step(next), NEXT_LINE_PAUSE)
         } else {
-          next = { display: lines.map(() => ""), phase: "typing", line: 0, char: 0 };
-          setTw(next);
-          tid = setTimeout(() => step(next), 600);
+          next = { display: lines.map(() => ''), phase: 'typing', line: 0, char: 0 }
+          setTw(next)
+          tid = setTimeout(() => step(next), 600)
         }
       }
     }
 
-    const initial: TwState = { display: lines.map(() => ""), phase: "typing", line: 0, char: 0 };
-    tid = setTimeout(() => step(initial), 500);
-    return () => clearTimeout(tid);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const initial: TwState = { display: lines.map(() => ''), phase: 'typing', line: 0, char: 0 }
+    tid = setTimeout(() => step(initial), 500)
+    return () => clearTimeout(tid)
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     // Generate star field
-    const starsEl = starsRef.current;
+    const starsEl = starsRef.current
     if (starsEl) {
-      const frag = document.createDocumentFragment();
+      const frag = document.createDocumentFragment()
       for (let i = 0; i < 40; i++) {
-        const s = document.createElement("div");
-        s.className = "star";
-        s.style.left = Math.random() * 100 + "%";
-        s.style.top = Math.random() * 100 + "%";
-        s.style.animationDelay = Math.random() * 3 + "s";
-        s.style.opacity = String(0.3 + Math.random() * 0.5);
-        if (Math.random() > 0.7) s.style.background = "var(--blue-2)";
-        frag.appendChild(s);
+        const s = document.createElement('div')
+        s.className = 'star'
+        s.style.left = Math.random() * 100 + '%'
+        s.style.top = Math.random() * 100 + '%'
+        s.style.animationDelay = Math.random() * 3 + 's'
+        s.style.opacity = String(0.3 + Math.random() * 0.5)
+        if (Math.random() > 0.7) s.style.background = 'var(--blue-2)'
+        frag.appendChild(s)
       }
-      starsEl.appendChild(frag);
+      starsEl.appendChild(frag)
     }
 
     // Morph animation on scroll
-    const heroWrap = heroWrapRef.current;
-    const laptop = laptopRef.current;
-    const phone = phoneRef.current;
-    const progressFill = progressFillRef.current;
-    const scrollCue = scrollCueRef.current;
+    const heroWrap = heroWrapRef.current
+    const laptop = laptopRef.current
+    const phone = phoneRef.current
+    const progressFill = progressFillRef.current
+    const scrollCue = scrollCueRef.current
 
-    let targetP = 0;
-    let currentP = 0;
-    let rafId = 0;
+    let targetP = 0
+    let currentP = 0
+    let rafId = 0
 
     function getTargetP() {
-      if (!heroWrap) return 0;
-      const rect = heroWrap.getBoundingClientRect();
-      const total = heroWrap.offsetHeight - window.innerHeight;
-      if (total <= 0) return 0;
-      const scrolled = -rect.top;
-      return Math.max(0, Math.min(1, scrolled / total));
+      if (!heroWrap) return 0
+      const rect = heroWrap.getBoundingClientRect()
+      const total = heroWrap.offsetHeight - window.innerHeight
+      if (total <= 0) return 0
+      const scrolled = -rect.top
+      return Math.max(0, Math.min(1, scrolled / total))
     }
 
     function morphLoop() {
-      targetP = getTargetP();
+      targetP = getTargetP()
       // Lerp towards target — factor 0.1 gives a buttery spring-like follow
-      currentP += (targetP - currentP) * 0.1;
+      currentP += (targetP - currentP) * 0.1
 
-      if (laptop) laptop.style.setProperty("--p", String(currentP));
-      if (phone) phone.style.setProperty("--p", String(currentP));
-      if (progressFill) progressFill.style.height = currentP * 100 + "%";
-      if (scrollCue) scrollCue.style.opacity = currentP > 0.05 ? "0" : "1";
+      if (laptop) laptop.style.setProperty('--p', String(currentP))
+      if (phone) phone.style.setProperty('--p', String(currentP))
+      if (progressFill) progressFill.style.height = currentP * 100 + '%'
+      if (scrollCue) scrollCue.style.opacity = currentP > 0.05 ? '0' : '1'
 
-      rafId = requestAnimationFrame(morphLoop);
+      rafId = requestAnimationFrame(morphLoop)
     }
 
-    rafId = requestAnimationFrame(morphLoop);
+    rafId = requestAnimationFrame(morphLoop)
 
-    function onScroll() { /* target is read inside the loop */ }
-    window.addEventListener("scroll", onScroll, { passive: true });
+    function onScroll() {
+      /* target is read inside the loop */
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
 
     // Tech stack card parallax
-    const stackCards = document.querySelectorAll<HTMLElement>(".stack-card");
+    const stackCards = document.querySelectorAll<HTMLElement>('.stack-card')
     function onMouseMove(e: MouseEvent) {
-      if (window.innerWidth <= 900) return;
-      const x = (e.clientX / window.innerWidth - 0.5) * 2;
-      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      if (window.innerWidth <= 900) return
+      const x = (e.clientX / window.innerWidth - 0.5) * 2
+      const y = (e.clientY / window.innerHeight - 0.5) * 2
       stackCards.forEach((card, i) => {
-        const f = (i + 1) * 0.5;
-        card.style.transform = `translate(${x * f}px, ${y * f}px)`;
-      });
+        const f = (i + 1) * 0.5
+        card.style.transform = `translate(${x * f}px, ${y * f}px)`
+      })
     }
 
-    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener('mousemove', onMouseMove)
 
     return () => {
-      cancelAnimationFrame(rafId);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("mousemove", onMouseMove);
-    };
-  }, []);
+      cancelAnimationFrame(rafId)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('mousemove', onMouseMove)
+    }
+  }, [])
 
   return (
     <section id="home" className="hero-wrap" data-section="" ref={heroWrapRef}>
@@ -174,11 +188,17 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
             <div
               key={c.hash}
               className="commit"
-              style={{ ...c.pos, ...(c.delay ? { animationDelay: c.delay } : {}) } as React.CSSProperties}
+              style={
+                { ...c.pos, ...(c.delay ? { animationDelay: c.delay } : {}) } as React.CSSProperties
+              }
             >
-              <span className="hash">{c.hash}</span> {c.msg}{" "}
-              <span className="plus">{c.plus}</span>
-              {c.minus && <> <span className="minus">{c.minus}</span></>}
+              <span className="hash">{c.hash}</span> {c.msg} <span className="plus">{c.plus}</span>
+              {c.minus && (
+                <>
+                  {' '}
+                  <span className="minus">{c.minus}</span>
+                </>
+              )}
             </div>
           ))}
         </div>
@@ -190,7 +210,7 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
               className="fill"
               id="progress-fill"
               ref={progressFillRef}
-              style={{ height: "0%" }}
+              style={{ height: '0%' }}
             />
           </div>
         </div>
@@ -210,9 +230,7 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
               ))}
             </h1>
             <p className="hero-sub">
-              I&apos;m{" "}
-              <strong style={{ color: "var(--text)" }}>{name}</strong>
-              {" "}— {heroSubtitle}
+              I&apos;m <strong style={{ color: 'var(--text)' }}>{name}</strong> — {heroSubtitle}
             </p>
             <div className="hero-meta">
               {stats.map((s) => (
@@ -257,7 +275,7 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
                 className="laptop"
                 id="laptop"
                 ref={laptopRef}
-                style={{ "--p": 0 } as React.CSSProperties}
+                style={{ '--p': 0 } as React.CSSProperties}
               >
                 <div className="laptop-body">
                   <div className="laptop-screen" id="laptop-screen">
@@ -308,16 +326,16 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
                         <div className="dc-code-body">
                           <div className="dc-line">
                             <span className="ln">1</span>
-                            <span className="kw">import</span> {"{ "}
+                            <span className="kw">import</span> {'{ '}
                             <span className="v">Router</span>
-                            {" }"} <span className="kw">from</span>{" "}
+                            {' }'} <span className="kw">from</span>{' '}
                             <span className="st">&apos;express&apos;</span>;
                           </div>
                           <div className="dc-line">
                             <span className="ln">2</span>
-                            <span className="kw">import</span> {"{ "}
+                            <span className="kw">import</span> {'{ '}
                             <span className="v">prisma</span>
-                            {" }"} <span className="kw">from</span>{" "}
+                            {' }'} <span className="kw">from</span>{' '}
                             <span className="st">&apos;./db&apos;</span>;
                           </div>
                           <div className="dc-line">
@@ -325,15 +343,13 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
                           </div>
                           <div className="dc-line">
                             <span className="ln">4</span>
-                            <span className="cm">
-                              // Auth + rate-limit ready
-                            </span>
+                            <span className="cm">{'// Auth + rate-limit ready'}</span>
                           </div>
                           <div className="dc-line">
                             <span className="ln">5</span>
-                            <span className="kw">export const</span>{" "}
-                            <span className="fn">router</span> ={" "}
-                            <span className="v">Router</span>();
+                            <span className="kw">export const</span>{' '}
+                            <span className="fn">router</span> = <span className="v">Router</span>
+                            ();
                           </div>
                           <div className="dc-line">
                             <span className="ln">6</span>
@@ -341,40 +357,38 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
                           <div className="dc-line">
                             <span className="ln">7</span>router.
                             <span className="fn">get</span>(
-                            <span className="st">&apos;/users/:id&apos;</span>,{" "}
-                            <span className="kw">async</span> (req, res) =&gt;{" "}
-                            {"{"}
+                            <span className="st">&apos;/users/:id&apos;</span>,{' '}
+                            <span className="kw">async</span> (req, res) =&gt; {'{'}
                           </div>
                           <div className="dc-line">
                             <span className="ln">8</span>
-                            {"  "}
-                            <span className="kw">const</span> user ={" "}
+                            {'  '}
+                            <span className="kw">const</span> user ={' '}
                             <span className="kw">await</span> prisma.user.
-                            <span className="fn">findUnique</span>({"({"}
+                            <span className="fn">findUnique</span>({'({'}
                           </div>
                           <div className="dc-line">
                             <span className="ln">9</span>
-                            {"    "}where: {"{ "}id: req.params.id{" }"},
+                            {'    '}where: {'{ '}id: req.params.id{' }'},
                           </div>
                           <div className="dc-line">
                             <span className="ln">10</span>
-                            {"    "}include: {"{ "}projects:{" "}
-                            <span className="bl">true</span>
-                            {" }"}
+                            {'    '}include: {'{ '}projects: <span className="bl">true</span>
+                            {' }'}
                           </div>
                           <div className="dc-line">
                             <span className="ln">11</span>
-                            {"  "}
-                            {"})"};
+                            {'  '}
+                            {'})'};
                           </div>
                           <div className="dc-line">
                             <span className="ln">12</span>
-                            {"  "}res.<span className="fn">json</span>(user);
+                            {'  '}res.<span className="fn">json</span>(user);
                             <span className="cursor" />
                           </div>
                           <div className="dc-line">
                             <span className="ln">13</span>
-                            {"}"});
+                            {'}'});
                           </div>
                         </div>
                         <div className="dc-statusbar">
@@ -395,7 +409,7 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
                 className="phone"
                 id="phone"
                 ref={phoneRef}
-                style={{ "--p": 0 } as React.CSSProperties}
+                style={{ '--p': 0 } as React.CSSProperties}
               >
                 <div className="phone-body" id="phone-body">
                   <div className="dc-phone-app">
@@ -418,16 +432,13 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
                       <div className="dc-pc-label">ACTIVE DEPLOYS</div>
                       <div className="dc-pc-value">14</div>
                       <div className="dc-pc-chart">
-                        <div className="dc-pc-bar" style={{ height: "30%" }} />
-                        <div className="dc-pc-bar" style={{ height: "55%" }} />
-                        <div className="dc-pc-bar" style={{ height: "40%" }} />
-                        <div className="dc-pc-bar" style={{ height: "75%" }} />
-                        <div className="dc-pc-bar" style={{ height: "60%" }} />
-                        <div
-                          className="dc-pc-bar on"
-                          style={{ height: "90%" }}
-                        />
-                        <div className="dc-pc-bar" style={{ height: "45%" }} />
+                        <div className="dc-pc-bar" style={{ height: '30%' }} />
+                        <div className="dc-pc-bar" style={{ height: '55%' }} />
+                        <div className="dc-pc-bar" style={{ height: '40%' }} />
+                        <div className="dc-pc-bar" style={{ height: '75%' }} />
+                        <div className="dc-pc-bar" style={{ height: '60%' }} />
+                        <div className="dc-pc-bar on" style={{ height: '90%' }} />
+                        <div className="dc-pc-bar" style={{ height: '45%' }} />
                       </div>
                     </div>
                     <div className="dc-phone-list">
@@ -472,7 +483,9 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
           <div className="hero-right">
             {HERO_STACK_CARDS.map((card) => (
               <div key={card.title} className="stack-card">
-                <div className="stack-icon" style={{ color: card.color }}>{card.icon}</div>
+                <div className="stack-icon" style={{ color: card.color }}>
+                  {card.icon}
+                </div>
                 <div>
                   <div className="t">{card.title}</div>
                   <div className="s">{card.sub}</div>
@@ -489,5 +502,5 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
         </div>
       </div>
     </section>
-  );
+  )
 }

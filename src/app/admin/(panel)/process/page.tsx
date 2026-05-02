@@ -7,7 +7,10 @@ export default function ProcessPage() {
   return (
     <>
       <ToastContainer />
-      <PageHeader title="Process & Stats" desc="Edit your workflow steps and homepage counter stats." />
+      <PageHeader
+        title="Process & Stats"
+        desc="Edit your workflow steps and homepage counter stats."
+      />
       <ProcessManager initialData={process} />
     </>
   )

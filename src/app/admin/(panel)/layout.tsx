@@ -7,20 +7,24 @@ export default async function PanelLayout({ children }: { children: React.ReactN
   if (!session) redirect('/admin/login')
 
   return (
-    <div style={{
-      display: 'flex',
-      minHeight: '100vh',
-      background: '#0b0f1a',
-      fontFamily: 'var(--font-sans, system-ui, sans-serif)',
-    }}>
-      <AdminSidebar />
-      <main style={{
-        flex: 1,
-        minWidth: 0,
-        padding: '32px',
-        overflowY: 'auto',
+    <div
+      style={{
+        display: 'flex',
         minHeight: '100vh',
-      }}>
+        background: '#0b0f1a',
+        fontFamily: 'var(--font-sans, system-ui, sans-serif)',
+      }}
+    >
+      <AdminSidebar />
+      <main
+        style={{
+          flex: 1,
+          minWidth: 0,
+          padding: '32px',
+          overflowY: 'auto',
+          minHeight: '100vh',
+        }}
+      >
         {children}
       </main>
     </div>

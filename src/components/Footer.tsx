@@ -9,10 +9,14 @@ export default function Footer({ site }: { site?: SiteData }) {
   const tagline = site?.footerTagline || 'Built from scratch.'
   return (
     <footer className="footer">
-      <div>© {year} {name} — {role}. {tagline}</div>
+      <div>
+        © {year} {name} — {role}. {tagline}
+      </div>
       <div className="footer-links">
         {FOOTER_LINKS.map((link) => (
-          <a key={link.href} href={link.href}>{link.label}</a>
+          <a key={link.href} href={link.href}>
+            {link.label}
+          </a>
         ))}
       </div>
     </footer>

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { jwtVerify } from 'jose'
 
 const secret = new TextEncoder().encode(
-  process.env.SESSION_SECRET || 'fallback-secret-change-in-production-32ch'
+  process.env.SESSION_SECRET || 'fallback-secret-change-in-production-32ch',
 )
 
 const PUBLIC_PATHS = ['/admin/login', '/api/admin/auth/login']

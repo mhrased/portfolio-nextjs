@@ -27,24 +27,41 @@ export function ToastContainer() {
   const [list, setList] = useState<Toast[]>([])
   useEffect(() => {
     listeners.push(setList)
-    return () => { const i = listeners.indexOf(setList); if (i > -1) listeners.splice(i, 1) }
+    return () => {
+      const i = listeners.indexOf(setList)
+      if (i > -1) listeners.splice(i, 1)
+    }
   }, [])
   return (
-    <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 9999, display: 'flex', flexDirection: 'column', gap: 10 }}>
+    <div
+      style={{
+        position: 'fixed',
+        bottom: 24,
+        right: 24,
+        zIndex: 9999,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 10,
+      }}
+    >
       {list.map((t) => (
-        <div key={t.id} style={{
-          background: t.type === 'success' ? '#1a2d1e' : '#2d1a1a',
-          border: `1px solid ${t.type === 'success' ? 'rgba(51,229,128,0.3)' : 'rgba(255,92,108,0.3)'}`,
-          borderRadius: 10,
-          padding: '12px 18px',
-          color: t.type === 'success' ? '#5dde8a' : '#ff7a8a',
-          fontSize: 14,
-          fontWeight: 500,
-          minWidth: 240,
-          boxShadow: '0 4px 24px rgba(0,0,0,0.4)',
-          animation: 'fadeIn 0.2s ease',
-        }}>
-          {t.type === 'success' ? '✓ ' : '✕ '}{t.message}
+        <div
+          key={t.id}
+          style={{
+            background: t.type === 'success' ? '#1a2d1e' : '#2d1a1a',
+            border: `1px solid ${t.type === 'success' ? 'rgba(51,229,128,0.3)' : 'rgba(255,92,108,0.3)'}`,
+            borderRadius: 10,
+            padding: '12px 18px',
+            color: t.type === 'success' ? '#5dde8a' : '#ff7a8a',
+            fontSize: 14,
+            fontWeight: 500,
+            minWidth: 240,
+            boxShadow: '0 4px 24px rgba(0,0,0,0.4)',
+            animation: 'fadeIn 0.2s ease',
+          }}
+        >
+          {t.type === 'success' ? '✓ ' : '✕ '}
+          {t.message}
         </div>
       ))}
     </div>
@@ -52,11 +69,38 @@ export function ToastContainer() {
 }
 
 /* ─── Page Header ─── */
-export function PageHeader({ title, desc, action }: { title: string; desc?: string; action?: ReactNode }) {
+export function PageHeader({
+  title,
+  desc,
+  action,
+}: {
+  title: string
+  desc?: string
+  action?: ReactNode
+}) {
   return (
-    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 32, gap: 16 }}>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        marginBottom: 32,
+        gap: 16,
+      }}
+    >
       <div>
-        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#f0f4ff', margin: 0, letterSpacing: '-0.03em', fontFamily: 'var(--font-display)' }}>{title}</h1>
+        <h1
+          style={{
+            fontSize: 26,
+            fontWeight: 700,
+            color: '#f0f4ff',
+            margin: 0,
+            letterSpacing: '-0.03em',
+            fontFamily: 'var(--font-display)',
+          }}
+        >
+          {title}
+        </h1>
         {desc && <p style={{ color: '#8892a4', fontSize: 14, marginTop: 6 }}>{desc}</p>}
       </div>
       {action && <div>{action}</div>}
@@ -67,23 +111,45 @@ export function PageHeader({ title, desc, action }: { title: string; desc?: stri
 /* ─── Card ─── */
 export function Card({ children, style }: { children: ReactNode; style?: React.CSSProperties }) {
   return (
-    <div style={{
-      background: '#141827',
-      border: '1px solid rgba(255,255,255,0.07)',
-      borderRadius: 14,
-      padding: 24,
-      ...style,
-    }}>
+    <div
+      style={{
+        background: '#141827',
+        border: '1px solid rgba(255,255,255,0.07)',
+        borderRadius: 14,
+        padding: 24,
+        ...style,
+      }}
+    >
       {children}
     </div>
   )
 }
 
 /* ─── Form Field ─── */
-export function Field({ label, hint, children, style }: { label: string; hint?: string; children: ReactNode; style?: React.CSSProperties }) {
+export function Field({
+  label,
+  hint,
+  children,
+  style,
+}: {
+  label: string
+  hint?: string
+  children: ReactNode
+  style?: React.CSSProperties
+}) {
   return (
     <div style={{ marginBottom: 20, ...style }}>
-      <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#8892a4', marginBottom: 8, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+      <label
+        style={{
+          display: 'block',
+          fontSize: 12,
+          fontWeight: 600,
+          color: '#8892a4',
+          marginBottom: 8,
+          letterSpacing: '0.06em',
+          textTransform: 'uppercase',
+        }}
+      >
         {label}
       </label>
       {children}
@@ -110,8 +176,14 @@ export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
         transition: 'border-color 0.15s',
         ...props.style,
       }}
-      onFocus={(e) => { e.target.style.borderColor = '#7359ff'; props.onFocus?.(e) }}
-      onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.1)'; props.onBlur?.(e) }}
+      onFocus={(e) => {
+        e.target.style.borderColor = '#7359ff'
+        props.onFocus?.(e)
+      }}
+      onBlur={(e) => {
+        e.target.style.borderColor = 'rgba(255,255,255,0.1)'
+        props.onBlur?.(e)
+      }}
     />
   )
 }
@@ -137,30 +209,62 @@ export function Textarea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement
         transition: 'border-color 0.15s',
         ...props.style,
       }}
-      onFocus={(e) => { e.target.style.borderColor = '#7359ff'; props.onFocus?.(e) }}
-      onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.1)'; props.onBlur?.(e) }}
+      onFocus={(e) => {
+        e.target.style.borderColor = '#7359ff'
+        props.onFocus?.(e)
+      }}
+      onBlur={(e) => {
+        e.target.style.borderColor = 'rgba(255,255,255,0.1)'
+        props.onBlur?.(e)
+      }}
     />
   )
 }
 
 /* ─── Button ─── */
 export function Btn({
-  children, variant = 'primary', loading, style, ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'ghost' | 'danger'; loading?: boolean }) {
+  children,
+  variant = 'primary',
+  loading,
+  style,
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: 'primary' | 'ghost' | 'danger'
+  loading?: boolean
+}) {
   const base: React.CSSProperties = {
-    display: 'inline-flex', alignItems: 'center', gap: 8,
-    padding: '10px 18px', borderRadius: 9, fontSize: 14, fontWeight: 600,
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 8,
+    padding: '10px 18px',
+    borderRadius: 9,
+    fontSize: 14,
+    fontWeight: 600,
     cursor: props.disabled || loading ? 'not-allowed' : 'pointer',
-    border: 'none', transition: 'all 0.15s', letterSpacing: '-0.01em',
+    border: 'none',
+    transition: 'all 0.15s',
+    letterSpacing: '-0.01em',
     opacity: props.disabled || loading ? 0.6 : 1,
   }
   const variants: Record<string, React.CSSProperties> = {
     primary: { background: 'linear-gradient(135deg,#7359ff,#5a44d4)', color: '#fff' },
-    ghost: { background: 'rgba(255,255,255,0.06)', color: '#d0d8e8', border: '1px solid rgba(255,255,255,0.1)' },
-    danger: { background: 'rgba(255,92,108,0.12)', color: '#ff7a8a', border: '1px solid rgba(255,92,108,0.25)' },
+    ghost: {
+      background: 'rgba(255,255,255,0.06)',
+      color: '#d0d8e8',
+      border: '1px solid rgba(255,255,255,0.1)',
+    },
+    danger: {
+      background: 'rgba(255,92,108,0.12)',
+      color: '#ff7a8a',
+      border: '1px solid rgba(255,92,108,0.25)',
+    },
   }
   return (
-    <button {...props} disabled={props.disabled || loading} style={{ ...base, ...variants[variant], ...style }}>
+    <button
+      {...props}
+      disabled={props.disabled || loading}
+      style={{ ...base, ...variants[variant], ...style }}
+    >
       {loading ? 'Saving...' : children}
     </button>
   )
@@ -175,34 +279,84 @@ export function Badge({ children, color = 'purple' }: { children: ReactNode; col
     yellow: { bg: 'rgba(255,217,51,0.12)', border: 'rgba(255,217,51,0.25)', text: '#fbbf24' },
     pink: { bg: 'rgba(255,92,138,0.12)', border: 'rgba(255,92,138,0.25)', text: '#f472b6' },
   }
-  const fallback = { bg: 'rgba(255,255,255,0.06)', border: 'rgba(255,255,255,0.12)', text: '#8892a4' }
+  const fallback = {
+    bg: 'rgba(255,255,255,0.06)',
+    border: 'rgba(255,255,255,0.12)',
+    text: '#8892a4',
+  }
   const c = colors[color] || fallback
   return (
-    <span style={{
-      display: 'inline-block',
-      background: c.bg, border: `1px solid ${c.border}`,
-      color: c.text, borderRadius: 6, padding: '2px 9px', fontSize: 12, fontWeight: 600,
-    }}>{children}</span>
+    <span
+      style={{
+        display: 'inline-block',
+        background: c.bg,
+        border: `1px solid ${c.border}`,
+        color: c.text,
+        borderRadius: 6,
+        padding: '2px 9px',
+        fontSize: 12,
+        fontWeight: 600,
+      }}
+    >
+      {children}
+    </span>
   )
 }
 
 /* ─── Confirm Dialog ─── */
 export function useConfirm() {
-  const [state, setState] = useState<{ message: string; resolve: (v: boolean) => void } | null>(null)
-  const confirm = (message: string) => new Promise<boolean>((resolve) => setState({ message, resolve }))
-  const Dialog = () => !state ? null : (
-    <div style={{
-      position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)', zIndex: 10000,
-      display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
-    }}>
-      <div style={{ background: '#141827', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 14, padding: 28, maxWidth: 400, width: '100%' }}>
-        <p style={{ color: '#f0f4ff', fontSize: 15, marginTop: 0 }}>{state.message}</p>
-        <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
-          <Btn variant="danger" onClick={() => { state.resolve(true); setState(null) }}>Delete</Btn>
-          <Btn variant="ghost" onClick={() => { state.resolve(false); setState(null) }}>Cancel</Btn>
+  const [state, setState] = useState<{ message: string; resolve: (v: boolean) => void } | null>(
+    null,
+  )
+  const confirm = (message: string) =>
+    new Promise<boolean>((resolve) => setState({ message, resolve }))
+  const Dialog = () =>
+    !state ? null : (
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0,0,0,0.7)',
+          zIndex: 10000,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+        }}
+      >
+        <div
+          style={{
+            background: '#141827',
+            border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: 14,
+            padding: 28,
+            maxWidth: 400,
+            width: '100%',
+          }}
+        >
+          <p style={{ color: '#f0f4ff', fontSize: 15, marginTop: 0 }}>{state.message}</p>
+          <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
+            <Btn
+              variant="danger"
+              onClick={() => {
+                state.resolve(true)
+                setState(null)
+              }}
+            >
+              Delete
+            </Btn>
+            <Btn
+              variant="ghost"
+              onClick={() => {
+                state.resolve(false)
+                setState(null)
+              }}
+            >
+              Cancel
+            </Btn>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
   return { confirm, Dialog }
 }

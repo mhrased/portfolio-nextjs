@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getProjects, saveProjects, ProjectItem } from '@/lib/data.server'
+import { getProjects, saveProjects } from '@/lib/data.server'
+import { sanitizeProjectBody } from '@/lib/sanitize'
 import { revalidatePath } from 'next/cache'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -8,21 +9,15 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json()
-  const items = getProjects()
-  const newItem: ProjectItem = {
-    id: uuidv4(),
-    title: body.title || '',
-    type: body.type || '',
-    desc: body.desc || '',
-    url: body.url || '',
-    linkLabel: body.linkLabel || 'VISIT LIVE',
-    tags: body.tags || [],
-    image: body.image || null,
-    wide: body.wide || false,
-    order: items.length,
-    colorTheme: body.colorTheme || 'purple',
+  let body: unknown
+  try {
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
+  const sanitized = sanitizeProjectBody(body)
+  const items = getProjects()
+  const newItem = { ...sanitized, id: uuidv4(), order: items.length }
   items.push(newItem)
   saveProjects(items)
   revalidatePath('/')

@@ -7,7 +7,10 @@ export default function MediaPage() {
   return (
     <>
       <ToastContainer />
-      <PageHeader title="Media Library" desc="Upload images — files replace existing ones with the same name." />
+      <PageHeader
+        title="Media Library"
+        desc="Upload images — files replace existing ones with the same name."
+      />
       <MediaManager initialFiles={uploads} />
     </>
   )

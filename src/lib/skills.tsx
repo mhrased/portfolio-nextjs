@@ -2,8 +2,16 @@ export const SKILLS = [
   {
     num: '/ 01',
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-        <path d="M3 3h18v18H3z" /><path d="M3 9h18M9 21V9" />
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <path d="M3 3h18v18H3z" />
+        <path d="M3 9h18M9 21V9" />
       </svg>
     ),
     title: 'Web Development',
@@ -16,7 +24,14 @@ export const SKILLS = [
   {
     num: '/ 02',
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
         <path d="M4 4h16v6H4zM4 14h16v6H4z" />
         <circle cx="7" cy="7" r="1" fill="currentColor" />
         <circle cx="7" cy="17" r="1" fill="currentColor" />
@@ -32,7 +47,14 @@ export const SKILLS = [
   {
     num: '/ 03',
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
         <ellipse cx="12" cy="5" rx="9" ry="3" />
         <path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6" />
       </svg>
@@ -47,8 +69,16 @@ export const SKILLS = [
   {
     num: '/ 04',
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-        <rect x="6" y="2" width="12" height="20" rx="2" /><path d="M11 18h2" />
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <rect x="6" y="2" width="12" height="20" rx="2" />
+        <path d="M11 18h2" />
       </svg>
     ),
     title: 'Mobile Development',
@@ -61,7 +91,14 @@ export const SKILLS = [
   {
     num: '/ 05',
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
         <path d="M17 18a5 5 0 0 0 0-10 7 7 0 0 0-13-2 5 5 0 0 0-2 9" />
         <path d="M12 12v8M8 16l4 4 4-4" />
       </svg>
@@ -76,7 +113,14 @@ export const SKILLS = [
   {
     num: '/ 06',
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
         <circle cx="12" cy="12" r="9" />
         <path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18M3 12h18" />
       </svg>

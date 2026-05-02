@@ -9,9 +9,18 @@ const NAV = [
     href: '/admin/dashboard',
     label: 'Dashboard',
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-        <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" />
-        <rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" />
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="14" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
       </svg>
     ),
   },
@@ -19,8 +28,16 @@ const NAV = [
     href: '/admin/profile',
     label: 'Profile',
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-        <circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
       </svg>
     ),
   },
@@ -28,7 +45,14 @@ const NAV = [
     href: '/admin/projects',
     label: 'Projects',
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
         <path d="M2 7h20M2 12h20M2 17h20" />
       </svg>
     ),
@@ -37,7 +61,14 @@ const NAV = [
     href: '/admin/skills',
     label: 'Skills',
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
       </svg>
     ),
@@ -46,8 +77,16 @@ const NAV = [
     href: '/admin/experience',
     label: 'Experience',
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-        <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
       </svg>
     ),
   },
@@ -55,7 +94,14 @@ const NAV = [
     href: '/admin/process',
     label: 'Process',
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
       </svg>
     ),
@@ -64,7 +110,14 @@ const NAV = [
     href: '/admin/media',
     label: 'Media',
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
         <rect x="3" y="3" width="18" height="18" rx="2" />
         <circle cx="8.5" cy="8.5" r="1.5" />
         <polyline points="21 15 16 10 5 21" />
@@ -86,46 +139,63 @@ export default function AdminSidebar() {
   }
 
   return (
-    <aside style={{
-      width: collapsed ? 64 : 240,
-      background: '#0f1322',
-      borderRight: '1px solid rgba(255,255,255,0.06)',
-      display: 'flex',
-      flexDirection: 'column',
-      flexShrink: 0,
-      transition: 'width 0.25s ease',
-      position: 'sticky',
-      top: 0,
-      height: '100vh',
-      overflow: 'hidden',
-    }}>
-      {/* Logo */}
-      <div style={{
-        padding: collapsed ? '20px 0' : '20px 20px',
-        borderBottom: '1px solid rgba(255,255,255,0.06)',
+    <aside
+      style={{
+        width: collapsed ? 64 : 240,
+        background: '#0f1322',
+        borderRight: '1px solid rgba(255,255,255,0.06)',
         display: 'flex',
-        alignItems: 'center',
-        gap: 12,
-        justifyContent: collapsed ? 'center' : 'space-between',
-      }}>
+        flexDirection: 'column',
+        flexShrink: 0,
+        transition: 'width 0.25s ease',
+        position: 'sticky',
+        top: 0,
+        height: '100vh',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Logo */}
+      <div
+        style={{
+          padding: collapsed ? '20px 0' : '20px 20px',
+          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 12,
+          justifyContent: collapsed ? 'center' : 'space-between',
+        }}
+      >
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{
-            width: 36,
-            height: 36,
-            background: 'linear-gradient(135deg, #7359ff, #3399ff)',
-            borderRadius: 10,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 13,
-            fontWeight: 700,
-            color: '#fff',
-            fontFamily: 'var(--font-display)',
-            flexShrink: 0,
-          }}>MR</div>
+          <div
+            style={{
+              width: 36,
+              height: 36,
+              background: 'linear-gradient(135deg, #7359ff, #3399ff)',
+              borderRadius: 10,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 13,
+              fontWeight: 700,
+              color: '#fff',
+              fontFamily: 'var(--font-display)',
+              flexShrink: 0,
+            }}
+          >
+            MR
+          </div>
           {!collapsed && (
             <div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: '#f0f4ff', letterSpacing: '-0.02em' }}>Admin</div>
+              <div
+                style={{
+                  fontSize: 13,
+                  fontWeight: 700,
+                  color: '#f0f4ff',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                Admin
+              </div>
               <div style={{ fontSize: 11, color: '#8892a4' }}>Portfolio CMS</div>
             </div>
           )}
@@ -133,9 +203,23 @@ export default function AdminSidebar() {
         {!collapsed && (
           <button
             onClick={() => setCollapsed(true)}
-            style={{ background: 'none', border: 'none', color: '#8892a4', cursor: 'pointer', padding: 4, borderRadius: 6 }}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#8892a4',
+              cursor: 'pointer',
+              padding: 4,
+              borderRadius: 6,
+            }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
@@ -143,9 +227,25 @@ export default function AdminSidebar() {
         {collapsed && (
           <button
             onClick={() => setCollapsed(false)}
-            style={{ position: 'absolute', right: 8, top: 26, background: 'none', border: 'none', color: '#8892a4', cursor: 'pointer', padding: 4 }}
+            style={{
+              position: 'absolute',
+              right: 8,
+              top: 26,
+              background: 'none',
+              border: 'none',
+              color: '#8892a4',
+              cursor: 'pointer',
+              padding: 4,
+            }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
               <path d="M9 18l6-6-6-6" />
             </svg>
           </button>
@@ -189,7 +289,9 @@ export default function AdminSidebar() {
                 }
               }}
             >
-              <span style={{ color: active ? '#7359ff' : 'inherit', flexShrink: 0 }}>{item.icon}</span>
+              <span style={{ color: active ? '#7359ff' : 'inherit', flexShrink: 0 }}>
+                {item.icon}
+              </span>
               {!collapsed && <span>{item.label}</span>}
             </Link>
           )
@@ -197,13 +299,15 @@ export default function AdminSidebar() {
       </nav>
 
       {/* Footer actions */}
-      <div style={{
-        padding: collapsed ? '16px 0' : '16px 20px',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 8,
-      }}>
+      <div
+        style={{
+          padding: collapsed ? '16px 0' : '16px 20px',
+          borderTop: '1px solid rgba(255,255,255,0.06)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 8,
+        }}
+      >
         <Link
           href="/"
           target="_blank"
@@ -219,11 +323,25 @@ export default function AdminSidebar() {
             padding: collapsed ? '8px 0' : '8px 10px',
             borderRadius: 8,
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.color = '#d0d8e8' }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#8892a4' }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(255,255,255,0.04)'
+            e.currentTarget.style.color = '#d0d8e8'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'transparent'
+            e.currentTarget.style.color = '#8892a4'
+          }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-            <circle cx="12" cy="12" r="10" /><path d="M12 2a14 14 0 0 1 0 20M12 2a14 14 0 0 0 0 20M2 12h20" />
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a14 14 0 0 1 0 20M12 2a14 14 0 0 0 0 20M2 12h20" />
           </svg>
           {!collapsed && <span>View Portfolio</span>}
         </Link>
@@ -245,10 +363,21 @@ export default function AdminSidebar() {
             cursor: 'pointer',
             width: '100%',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,92,108,0.08)' }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(255,92,108,0.08)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'transparent'
+          }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
           </svg>
           {!collapsed && <span>{loggingOut ? 'Logging out...' : 'Logout'}</span>}
