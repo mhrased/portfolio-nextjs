@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { adminAuth } from '@/lib/firebase/admin'
+import { getAdminAuth } from '@/lib/firebase/admin'
 import { createSession } from '@/lib/auth/session'
 import { checkRateLimit, resetRateLimit } from '@/lib/auth/rate-limit'
 
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const decoded = await adminAuth.verifyIdToken(idToken)
+    const decoded = await getAdminAuth().verifyIdToken(idToken)
     resetRateLimit(ip)
     await createSession(decoded.email ?? '')
     return NextResponse.json({ success: true })
