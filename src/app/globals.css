@@ -207,6 +207,136 @@
   filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.18));
 }
 
+[data-theme='light'] .laptop-base {
+  background: linear-gradient(180deg, #c8cad0 0%, #a8abb5 100%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme='light'] .laptop-base::after {
+  background: #9a9da8;
+}
+
+[data-theme='light'] .laptop-screen {
+  background: #e8eaf0;
+  border-color: #c0c3cc;
+  box-shadow:
+    0 0 0 2px #b0b3bc,
+    0 30px 60px rgba(0, 0, 0, 0.18),
+    inset 0 0 40px rgba(115, 89, 255, 0.04);
+}
+
+[data-theme='light'] .laptop-screen::before {
+  background: #c0c3cc;
+}
+
+[data-theme='light'] .dc-code,
+[data-theme='light'] .dc-dash,
+[data-theme='light'] .dc-term {
+  background: #f8f8f8;
+  color: #333;
+}
+
+[data-theme='light'] .dc-code-sidebar {
+  background: #f0f0f0;
+  border-right-color: #dcdcdc;
+}
+
+[data-theme='light'] .dc-tabs {
+  background: #f0f0f0;
+  border-bottom-color: #dcdcdc;
+}
+
+[data-theme='light'] .dc-tab {
+  border-right-color: #dcdcdc;
+}
+
+[data-theme='light'] .dc-tab.on {
+  background: #f8f8f8;
+  color: #222;
+}
+
+[data-theme='light'] .dc-file-tree .dcf {
+  color: #555;
+}
+
+[data-theme='light'] .dc-file-tree .dcf.active {
+  color: #111;
+}
+
+[data-theme='light'] .dc-line .ln {
+  color: #aaa;
+}
+
+[data-theme='light'] .dc-line .kw {
+  color: #7c3aed;
+}
+
+[data-theme='light'] .dc-line .fn {
+  color: #1d6fca;
+}
+
+[data-theme='light'] .dc-line .st {
+  color: #c2410c;
+}
+
+[data-theme='light'] .dc-line .v {
+  color: #16a34a;
+}
+
+[data-theme='light'] .dc-line .bl {
+  color: #dc2626;
+}
+
+[data-theme='light'] .dc-line .cm {
+  color: #6b7280;
+}
+
+/* ── Phone mockup ── */
+[data-theme='light'] .phone-body {
+  background: #e8eaf0;
+  border-color: #c0c3cc;
+  box-shadow:
+    0 0 0 2px #b0b3bc,
+    0 30px 60px rgba(0, 0, 0, 0.18),
+    inset 0 0 30px rgba(115, 89, 255, 0.04);
+}
+
+[data-theme='light'] .phone-body::before {
+  background: #c8cad4;
+}
+
+[data-theme='light'] .phone-body::after {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme='light'] .dc-phone-app {
+  background: linear-gradient(180deg, #f0f0f5 0%, #f8f8fb 100%);
+}
+
+[data-theme='light'] .dc-pl-item {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: #e0e0e8;
+}
+
+[data-theme='light'] .dc-dash-side {
+  background: #f0f0f0;
+  border-right-color: #dcdcdc;
+}
+
+[data-theme='light'] .dc-kpi {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: #e0e0e8;
+}
+
+[data-theme='light'] .dc-dash-chart {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: #e0e0e8;
+}
+
+[data-theme='light'] .dc-term {
+  background: #1e1e2e;
+}
+
 [data-theme='light'] .commit {
   background: rgba(255, 255, 255, 0.94);
   border-color: var(--border-2);
@@ -1614,14 +1744,14 @@ button {
 }
 
 .stack-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 22px;
   flex-shrink: 0;
   background: rgba(115, 89, 255, 0.15);
   color: var(--purple-3);
