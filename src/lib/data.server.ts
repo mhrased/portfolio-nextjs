@@ -44,6 +44,7 @@ export interface SiteData {
   contactTitle: string
   contactKicker: string
   footerTagline: string
+  gaId: string
 }
 
 export interface HeroData {
@@ -131,6 +132,7 @@ const defaultSite: SiteData = {
   contactTitle: 'Got a product to build?',
   contactKicker: "Whether it's an MVP, a scale-up, or a full-stack rebuild — tell me about it. I reply within 24 hours.",
   footerTagline: 'Built from scratch.',
+  gaId: '',
 }
 
 const defaultHero: HeroData = {

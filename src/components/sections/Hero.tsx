@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SITE } from "@/constants/site";
 import { HERO_LINES, HERO_STATS, HERO_STACK_CARDS, HERO_COMMITS } from "@/lib/hero";
 import type { SiteData, HeroData } from "@/lib/data.server";
@@ -23,9 +23,67 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
   const laptopRef = useRef<HTMLDivElement>(null);
   const phoneRef = useRef<HTMLDivElement>(null);
   const progressFillRef = useRef<HTMLDivElement>(null);
-
   const scrollCueRef = useRef<HTMLDivElement>(null);
   const starsRef = useRef<HTMLDivElement>(null);
+
+  // Typewriter state machine
+  type TwState = { display: string[]; phase: "typing" | "paused" | "erasing"; line: number; char: number };
+  const [tw, setTw] = useState<TwState>({ display: lines.map(() => ""), phase: "typing", line: 0, char: 0 });
+
+  useEffect(() => {
+    const TYPING_MS = 130;
+    const ERASE_MS  = 70;
+    const PAUSE_MS  = 2600;
+    const NEXT_LINE_PAUSE = 350;
+    let tid: ReturnType<typeof setTimeout>;
+
+    function step(s: TwState) {
+      const { display, phase, line, char } = s;
+      let next: TwState;
+
+      if (phase === "typing") {
+        const target = lines[line];
+        if (char < target.length) {
+          const d = display.map((t, i) => (i === line ? target.slice(0, char + 1) : t));
+          next = { display: d, phase: "typing", line, char: char + 1 };
+          setTw(next);
+          tid = setTimeout(() => step(next), TYPING_MS);
+        } else if (line < lines.length - 1) {
+          next = { ...s, line: line + 1, char: 0 };
+          setTw(next);
+          tid = setTimeout(() => step(next), NEXT_LINE_PAUSE);
+        } else {
+          next = { ...s, phase: "paused" };
+          setTw(next);
+          tid = setTimeout(() => step(next), PAUSE_MS);
+        }
+      } else if (phase === "paused") {
+        next = { ...s, phase: "erasing" };
+        setTw(next);
+        tid = setTimeout(() => step(next), 0);
+      } else {
+        if (char > 0) {
+          const d = display.map((t, i) => (i === line ? lines[line].slice(0, char - 1) : t));
+          next = { display: d, phase: "erasing", line, char: char - 1 };
+          setTw(next);
+          tid = setTimeout(() => step(next), ERASE_MS);
+        } else if (line > 0) {
+          const prev = line - 1;
+          next = { ...s, line: prev, char: lines[prev].length };
+          setTw(next);
+          tid = setTimeout(() => step(next), NEXT_LINE_PAUSE);
+        } else {
+          next = { display: lines.map(() => ""), phase: "typing", line: 0, char: 0 };
+          setTw(next);
+          tid = setTimeout(() => step(next), 600);
+        }
+      }
+    }
+
+    const initial: TwState = { display: lines.map(() => ""), phase: "typing", line: 0, char: 0 };
+    tid = setTimeout(() => step(initial), 500);
+    return () => clearTimeout(tid);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     // Generate star field
@@ -60,6 +118,7 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
       if (!heroWrap) return 0;
       const rect = heroWrap.getBoundingClientRect();
       const total = heroWrap.offsetHeight - window.innerHeight;
+      if (total <= 0) return 0;
       const scrolled = -rect.top;
       return Math.max(0, Math.min(1, scrolled / total));
     }
@@ -85,6 +144,7 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
     // Tech stack card parallax
     const stackCards = document.querySelectorAll<HTMLElement>(".stack-card");
     function onMouseMove(e: MouseEvent) {
+      if (window.innerWidth <= 900) return;
       const x = (e.clientX / window.innerWidth - 0.5) * 2;
       const y = (e.clientY / window.innerHeight - 0.5) * 2;
       stackCards.forEach((card, i) => {
@@ -142,9 +202,10 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
               <span className="dot" /> {status}
             </div>
             <h1 className="hero-title">
-              {lines.map((line) => (
-                <span key={line} className="line">
-                  <span className="grad-text">{line}</span>
+              {lines.map((_, i) => (
+                <span key={i} className="line">
+                  <span className="grad-text">{tw.display[i]}</span>
+                  {i === tw.line && <span className="tw-cursor" />}
                 </span>
               ))}
             </h1>

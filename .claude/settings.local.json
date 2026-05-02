@@ -23,7 +23,13 @@
       "Bash(curl *)",
       "Bash(python3 -m json.tool)",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(s['id'], s['title']\\) for s in d]\")",
-      "Bash(/usr/bin/curl *)"
+      "Bash(/usr/bin/curl *)",
+      "Bash(awk '/\\\\.spec-title/,/^}/' /Users/rashed/Desktop/coding/my-portfolio/src/app/globals.css)",
+      "Bash(awk '/\\\\.spec-desc/,/^}/' /Users/rashed/Desktop/coding/my-portfolio/src/app/globals.css)",
+      "Bash(grep -n \"background:.*rgba\\(.*1[5-9],.*1[0-9],.*[23][0-9]\\\\|background:.*#0[a-f0-9]\\\\{5\\\\}\\\\|background:.*#1[a-f0-9]\\\\{5\\\\}\" /Users/rashed/Desktop/coding/my-portfolio/src/app/globals.css)",
+      "Bash(awk 'NR>=1395 && NR<=1480' /Users/rashed/Desktop/coding/my-portfolio/src/app/globals.css)",
+      "Bash(awk 'NR>=2320 && NR<=2395' /Users/rashed/Desktop/coding/my-portfolio/src/app/globals.css)",
+      "Bash(node *)"
     ]
   }
 }

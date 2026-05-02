@@ -127,6 +127,21 @@ export default function ProfileForm({ site: init, hero: initHero }: { site: Site
         <Btn onClick={saveSite} loading={saving}>Save All Profile Changes</Btn>
       </Card>
 
+      {/* ── Integrations ── */}
+      <Card>
+        <h2 style={{ fontSize: 15, fontWeight: 700, color: '#f0f4ff', margin: '0 0 6px', letterSpacing: '-0.02em' }}>Integrations</h2>
+        <p style={{ fontSize: 13, color: '#6b7280', margin: '0 0 20px' }}>Third-party services. Changes take effect on the next page load.</p>
+        <Field label="Google Analytics Measurement ID" hint="Format: G-XXXXXXXXXX — leave blank to disable">
+          <Input
+            value={site.gaId ?? ''}
+            onChange={(e) => updateSite('gaId', e.target.value)}
+            placeholder="G-XXXXXXXXXX"
+            style={{ fontFamily: 'var(--font-mono)', letterSpacing: '0.03em' }}
+          />
+        </Field>
+        <Btn onClick={saveSite} loading={saving}>Save Integrations</Btn>
+      </Card>
+
       {/* ── Hero ── */}
       <Card>
         <h2 style={{ fontSize: 15, fontWeight: 700, color: '#f0f4ff', margin: '0 0 20px', letterSpacing: '-0.02em' }}>Hero Section</h2>
