@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { SITE } from '@/constants/site'
 import { HERO_LINES, HERO_STATS, HERO_STACK_CARDS, HERO_COMMITS } from '@/lib/hero'
 import type { SiteData, HeroData } from '@/lib/data.server'
@@ -11,7 +11,10 @@ interface Props {
 }
 
 export default function Hero({ site: siteData, hero: heroData }: Props) {
-  const lines = heroData?.lines?.length ? heroData.lines : [...HERO_LINES]
+  const lines = useMemo(
+    () => (heroData?.lines?.length ? heroData.lines : [...HERO_LINES]),
+    [heroData],
+  )
   const stats = heroData?.stats?.length ? heroData.stats : [...HERO_STATS]
   const status = siteData?.status || SITE.status
   const name = siteData?.name || SITE.name
@@ -95,7 +98,7 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
     const initial: TwState = { display: lines.map(() => ''), phase: 'typing', line: 0, char: 0 }
     tid = setTimeout(() => step(initial), 500)
     return () => clearTimeout(tid)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [lines])
 
   useEffect(() => {
     // Generate star field
@@ -129,8 +132,9 @@ export default function Hero({ site: siteData, hero: heroData }: Props) {
     function getTargetP() {
       if (!heroWrap) return 0
       const rect = heroWrap.getBoundingClientRect()
-      const total = heroWrap.offsetHeight - window.innerHeight
-      if (total <= 0) return 0
+      const viewH = window.innerHeight || document.documentElement.clientHeight
+      const total = heroWrap.offsetHeight - viewH
+      if (total <= 0 || !isFinite(total)) return 0
       const scrolled = -rect.top
       return Math.max(0, Math.min(1, scrolled / total))
     }

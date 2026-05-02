@@ -43,7 +43,7 @@ export default function Contact({ site: siteData }: { site?: SiteData }) {
               </svg>
             </a>
             <a
-              href={('resumeUrl' in SITE_DATA ? SITE_DATA.resumeUrl : null) || '#'}
+              href={(SITE_DATA as { resumeUrl?: string }).resumeUrl || '#'}
               className="btn btn-ghost"
             >
               Download resume

@@ -2,8 +2,11 @@ import { SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 
 const COOKIE_NAME = 'admin_session'
+if (!process.env.SESSION_SECRET && process.env.NODE_ENV === 'production') {
+  throw new Error('SESSION_SECRET environment variable must be set in production')
+}
 const secret = new TextEncoder().encode(
-  process.env.SESSION_SECRET || 'fallback-secret-change-in-production-32ch',
+  process.env.SESSION_SECRET || 'fallback-secret-dev-only-not-for-production',
 )
 
 export interface SessionPayload {

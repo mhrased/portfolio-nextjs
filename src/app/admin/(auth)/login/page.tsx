@@ -18,6 +18,7 @@ export default function LoginPage() {
     setLoading(true)
     try {
       const credential = await signInWithEmailAndPassword(auth, email, password)
+      if (!credential.user) throw Object.assign(new Error(), { code: 'auth/null-user' })
       const idToken = await credential.user.getIdToken()
 
       const res = await fetch('/api/admin/auth/login', {

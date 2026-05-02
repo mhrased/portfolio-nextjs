@@ -38,7 +38,8 @@ export default function Process({ process: processData }: Props) {
         entries.forEach((e) => {
           if (!e.isIntersecting) return
           const el = e.target as HTMLElement
-          const target = parseInt(el.dataset.count!, 10)
+          const target = parseInt(el.dataset.count ?? '0', 10)
+          if (!isFinite(target) || target <= 0) return
           const suffix = el.dataset.suffix || '+'
           let cur = 0
           const step = Math.max(1, Math.floor(target / 40))
